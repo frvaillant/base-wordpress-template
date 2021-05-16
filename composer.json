@@ -1,0 +1,21 @@
+{
+    "name": "francois/yourname",
+    "authors": [
+        {
+            "name": "francoisvaillant",
+            "email": "frvaillant@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": ""
+        }
+    },
+    "require": {
+        "twig/twig": "^3.0",
+        "rdlowrey/auryn": "^1.4",
+        "symfony/webpack-encore-bundle": "^1.11",
+        "phpmailer/phpmailer": "^6.4",
+        "twig/cssinliner-extra": "^3.3",
+    }
+}

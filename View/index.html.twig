@@ -1,0 +1,87 @@
+{% extends '__base.html.twig' %}
+
+{% block body %}
+
+    <div class="row yellow music-for-all">
+        <div class="container">
+            <div class="col s12 l6 animate animate-from-left not-visible">
+                <span class="music">Musique</span>
+                <h4>Partout</h4>
+                <p class="flow-text">Mobile, Ricochet Sonore co-construit ses actions avec des structures partenaires : centres sociaux,
+                    associations de quartier, bailleurs sociaux, collectivités, structures sociales et médico-sociales,
+                    bibliothèques, établissements scolaires, etc.
+                </p>
+            </div>
+            <div class="col s12 l6 animate animate-from-right not-visible">
+
+                <span class="music">Musique</span>
+                <h4>Pour tous</h4>
+                <p class="flow-text">L’association s’adresse à toutes les personnes, de la petite enfance jusqu’aux seniors et favorise la
+                    rencontre, la diversité et l’ouverture culturelle.</p>
+            </div>
+            <div class="col s12 center-align">
+
+                    <a href="{{ bloginfo('url') }}/index.php/demande-daction" class="btn-spec white">Demander une animation</a>
+
+            </div>
+        </div>
+    </div>
+{% if homeInfo %}
+<div class="row red music-for-all home-info">
+    <div class="container">
+        <div class="col s12 l6 animate animate-from-left not-visible">
+            <span class="music">A NOTER</span>
+            <h4>Information importante</h4>
+            <p>
+                <img src="{{ homeInfo.picture }}" alt="" width="100%">
+
+            </p>
+
+        </div>
+        <div class="col s12 l6 animate animate-from-right not-visible white-text">
+            <span class="music xhite-text">{{ homeInfo.title  | raw }}</span>
+            <h4 class="white-text">{{ homeInfo.subTitle  | raw }}</h4>
+            <p class="flow-text white-text">
+                {{ homeInfo.content | raw }}
+            </p>
+            <p>
+                <a href="{{ bloginfo('url') }}/index.php/actus/?actu={{ homeInfo.id }}" class="btn-spec">En savoir plus</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+    {{ home_sounds() }}
+    <div class="row hidden" id="audio-player-line">
+        {% include 'AudioPlayer/player.html.twig' %}
+    </div>
+    {{ home_actus() }}
+
+
+    <div class="row cyan music-for-all">
+        <div class="container">
+            <div class="col s12 l6 animate animate-from-left not-visible">
+                <span class="music white-text">DES ANIMATIONS</span>
+                <h4 class="white-text">diversifiées</h4>
+                <p class="white-text">
+                    Ricochet sonore se meut dans les partitions de l'existence afin d'ouvrir grand nos oreilles
+                </p>
+            </div>
+            <div class="col s12 l6 animate animate-from-right not-visible">
+                <span class="music white-text">Des propositions</span>
+                <h4 class="white-text">Variées</h4>
+                <p class="white-text">
+                    Ricochet sonore se meut dans les partitions de l'existence afin d'ouvrir grand nos oreilles
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    {% for section in sections %}
+        {% include 'Sections/section.html.twig' %}
+    {% endfor %}
+
+
+{% endblock %}
