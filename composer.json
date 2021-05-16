@@ -16,6 +16,6 @@
         "rdlowrey/auryn": "^1.4",
         "symfony/webpack-encore-bundle": "^1.11",
         "phpmailer/phpmailer": "^6.4",
-        "twig/cssinliner-extra": "^3.3",
+        "twig/cssinliner-extra": "^3.3"
     }
 }
