@@ -1,6 +1,7 @@
 <?php
 require('vendor/autoload.php');
 
+use Auryn\Injector;
 
 /**
  * Prepare twig renderer
@@ -119,15 +120,21 @@ function dump($data) {
 /**
  * Init dependencies injections
  */
-$injector = new Auryn\Injector;
-
-
+$injector = new Injector;
 
 add_theme_support( 'post-thumbnails' );
 
 
 /**
+ * EDITEUR
+ */
+
+
+/**
  * Entités complémentaires
+ * @param $entityName
+ * @param $singular
+ * @param $plurial
  */
 
 function create_custom_post_type($entityName, $singular, $plurial)
@@ -172,9 +179,9 @@ function create_custom_post_type($entityName, $singular, $plurial)
 
     );
 
-    // On enregistre notre custom post type qu'on nomme ici "sections" et ses arguments
     register_post_type( $entityName, $args );
 }
+
 
 /*
 function section_entity() {

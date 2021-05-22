@@ -1,0 +1,16 @@
+{% extends '__base.html.twig' %}
+
+{% block body %}
+
+    <h1 class="post-title">{{ post.title }}</h1>
+    <div class="post-meta">
+        Posté le {{ post.post_date | date('d-m-Y') }} par {{ post.author.email }}
+    </div>
+
+        <div class="post-content">
+            <p>
+                {{ post.content | raw }} {# post.post_content works also / use  {{ do_shortcodes(page.content) | raw }} if tou use shortcodes #}
+            </p>
+        </div>
+
+{% endblock %}
