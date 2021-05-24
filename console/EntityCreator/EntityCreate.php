@@ -11,10 +11,10 @@ class EntityCreate extends AbstractCreator
     private $arguments;
     private $name;
 
-    public function __construct($arguments)
+    public function __construct(array $arguments)
     {
         $this->arguments = $arguments;
-        $names = explode(' ', $arguments[2]);
+        $names = explode(' ', $arguments['entity']);
         $this->name = implode('', array_map(function($value) {
             return ucfirst($value);
         }, $names));
@@ -31,7 +31,7 @@ class EntityCreate extends AbstractCreator
             file_put_contents(self::ENTITY_FOLDER . '/' . ucfirst($this->name) . '.php', $source);
             return;
         }
-        throw new \Exception('Le fichier source est introuvable');
+        throw new \Exception('Entity source file is not found');
     }
 
     private function createRepository()
@@ -40,17 +40,18 @@ class EntityCreate extends AbstractCreator
         if ($source) {
             $source = str_replace('/*', '', $source);
             $source = str_replace('EntityName', ucfirst($this->name), $source);
+            $source = str_replace('EntityNameLower', strtolower($this->name), $source);
             file_put_contents(self::MODEL_FOLDER . '/' . ucfirst($this->name) . 'Repository.php', $source);
             return;
         }
-        throw new \Exception('Le fichier source est introuvable');
+        throw new \Exception('Repository source file is not found');
 
     }
 
     private function addCustomPost()
     {
-        if (isset($this->arguments[3]) && isset($this->arguments[4])) {
-            $customPost = new CustomPostCreator($this->name, $this->arguments[3], $this->arguments[4]);
+        if (isset($this->arguments['singular']) && isset($this->arguments['plurial'])) {
+            $customPost = new CustomPostCreator($this->name, $this->arguments['singular'], $this->arguments['plurial']);
             if(!$customPost) {
                 throw new \Exception('Impossible d\'instancier un custom post pour ' . $this->name);
             }

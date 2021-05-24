@@ -20,7 +20,7 @@ class TemplateCreate extends AbstractCreator
 
     public function __construct($arguments)
     {
-        $names = explode(' ', $arguments[2]);
+        $names = explode(' ', $arguments['className']);
         $this->templateName = implode('', array_map(function($value) {
             return ucfirst($value);
         }, $names));
@@ -29,7 +29,7 @@ class TemplateCreate extends AbstractCreator
             return strtolower($value);
         }, $names)));
 
-        $this->frenchName = $arguments[3];
+        $this->frenchName = $arguments['frenchName'];
 
         if(!is_dir(self::CONTROLLER_FOLDER)) {
 
