@@ -73,6 +73,15 @@ if ($action) {
                 ]);
                 $creator->create();
                 echo $creator->getMessage()['status']($creator->getMessage()['message']);
+
+                $templateName = explode('Template', $templateName)[0];
+                $creator = new TemplateCreate([
+                    'className' => $templateName,
+                    'frenchName' => $templateName,
+                ]);
+                $creator->create();
+                echo $creator->getMessage()['status']($creator->getMessage()['message']);
+
             } else {
                 echo error('Il manque des arguments ! Attendus : php console/create template "className" "french name"');
             }
