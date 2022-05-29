@@ -20,6 +20,9 @@ class TemplateCreate extends AbstractCreator
 
     public function __construct($arguments)
     {
+        if(!is_dir(self::TEMPLATE_FOLDER)) {
+            mkdir(self::TEMPLATE_FOLDER);
+        }
         $names = explode(' ', $arguments['className']);
         $this->templateName = implode('', array_map(function($value) {
             return ucfirst($value);

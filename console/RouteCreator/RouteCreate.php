@@ -28,11 +28,12 @@ class RouteCreate extends AbstractCreator
     private function createRoute()
     {
         if($this->source) {
+            $this->source = str_replace('<?php', '', $this->source);
             $this->source = str_replace('/*', '', $this->source);
             $this->source = str_replace('*/', '', $this->source);
 
             foreach ($this->arguments as $text => $value) {
-                str_replace($text, $value, $this->source);
+                $this->source = str_replace($text, $value, $this->source);
             }
 
             $newContent = $this->originalContent . PHP_EOL . PHP_EOL . $this->source;

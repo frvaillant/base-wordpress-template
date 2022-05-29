@@ -5,6 +5,7 @@ use Auryn\Injector;
 
 
 include(__DIR__ . '/twig.php');
+include(__DIR__ . '/routes.php');
 
 
 

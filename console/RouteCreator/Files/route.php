@@ -7,15 +7,15 @@ function functionName( $router ) {
 
     $route_args = array(
         'path' => '^routeName',
-        'query_vars' => array( ),
+        'query_vars' => [],
         'page_callback' => 'callbackName',
-        'page_arguments' => array( ),
+        'page_arguments' => [],
         'access_callback' => true,
         'title' => __( 'routeDescription' ),
-        'template' => array(
+        'template' => [
             'templateName.php',
             dirname( __FILE__ ) . '/Templates/templateName.php'
-        )
+        ]
     );
     $router->add_route( 'routeName', $route_args );
 

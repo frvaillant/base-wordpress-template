@@ -1,4 +1,4 @@
-#!/usr/bin/env php
+#!/usr/bin/env php // Added for syntax coloration in file without extension .php
 <?php
 require_once ( __DIR__ . '/EntityCreator/EntityCreate.php');
 require_once ( __DIR__ . '/TemplateCreator/TemplateCreate.php');
@@ -19,12 +19,19 @@ if($action === 'template') {
 }
 
 if($action === 'route') {
-    $functionName       = readline('Nom de la fonction :');
-    $routeName          = readline('Nom de la route :');
-    $routeDescription   = readline('Description de la route :');
-    $callbackName       = readline('Nom de la fonction de callback :');
-    $templateName       = readline('Nom du fichier de template :');
-    $frenchTemplateName = readline('Son nom en Francais (Affichage article; page publication ...) :');
+    $functionName       = readline('Nom de la fonction (myRoute) :');
+    $routeName          = readline('Url de la route (my-route) :');
+    if(routeExists($routeName)) {
+        echo error('Une route personnalisée existe déjà avec cet URL : /' . $routeName );
+        die;
+    }
+    $routeDescription   = readline('Description de la route (description of my route) :');
+    $callbackName       = readline('Nom de la fonction de callback (myRouteCallback) - Son nom doit être différent de la fonction de base :');
+    if($functionName === $callbackName) {
+        echo error('La fonction de gestion de la route et son callback ne peuvent pas avoir le même nom');
+        die;
+    }
+    $templateName       = readline('Nom du fichier de template (RouteTemplate) :');
 }
 
 if ($action) {
@@ -113,5 +120,10 @@ function nothing()
 function message($message) {
     $colors = new Colors();
     return $colors->getColoredString($message, 'green');
+}
+
+function routeExists($routeName) {
+    $file = __DIR__ . '/../routes.php';
+    return count(explode('^' . $routeName, file_get_contents($file))) > 1;
 }
 
