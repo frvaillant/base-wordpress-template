@@ -18,7 +18,7 @@ class EntityNameRepository  extends AbstractRepository
     public function findAll()
     {
         $args = [
-            'post_type'         => 'EntityNameLower',
+            'post_type'         => 'entitynamelower',
             'posts_per_page'    => -1,
             'post_status'       => 'publish',
             'orderby'			=> 'post_date',

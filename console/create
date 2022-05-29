@@ -2,18 +2,28 @@
 <?php
 require_once ( __DIR__ . '/EntityCreator/EntityCreate.php');
 require_once ( __DIR__ . '/TemplateCreator/TemplateCreate.php');
+require_once ( __DIR__ . '/RouteCreator/RouteCreate.php');
 require_once ( __DIR__ . '/Colors.php');
 
 
-$action = readline('Que voulez vous créer ? (entity/template) :');
+$action = readline('Que voulez vous créer ? (entity/template/route) :');
 if($action === 'entity') {
     $entityName = readline('Donnez lui un nom pour le code (Post, Article ...) :');
-    $singular = readline('Son nom en Francais pour l\'affichage au singulier (Article, Journal ...) :');
-    $plurial = readline('Son nom en Francais pour l\'affichage au pluriel (Articles, Journaux ...) :');
+    $singular   = readline('Son nom en Francais pour l\'affichage au singulier (Article, Journal ...) :');
+    $plurial    = readline('Son nom en Francais pour l\'affichage au pluriel (Articles, Journaux ...) :');
 }
 
 if($action === 'template') {
-    $className = readline('Nom de la class (Post, Article ...) :');
+    $className          = readline('Nom de la class (Post, Article ...) :');
+    $frenchTemplateName = readline('Son nom en Francais (Affichage article; page publication ...) :');
+}
+
+if($action === 'route') {
+    $functionName       = readline('Nom de la fonction :');
+    $routeName          = readline('Nom de la route :');
+    $routeDescription   = readline('Description de la route :');
+    $callbackName       = readline('Nom de la fonction de callback :');
+    $templateName       = readline('Nom du fichier de template :');
     $frenchTemplateName = readline('Son nom en Francais (Affichage article; page publication ...) :');
 }
 
@@ -37,6 +47,22 @@ if ($action) {
                 $creator = new TemplateCreate([
                     'className' => $className,
                     'frenchName' => $frenchTemplateName,
+                ]);
+                $creator->create();
+                echo $creator->getMessage()['status']($creator->getMessage()['message']);
+            } else {
+                echo error('Il manque des arguments ! Attendus : php console/create template "className" "french name"');
+            }
+            break;
+
+        case 'route':
+            if ($functionName && $routeName && $routeDescription && $callbackName && $templateName) {
+                $creator = new RouteCreate([
+                    'functionName'     => $functionName,
+                    'routeName'        => $routeName,
+                    'routeDescription' => $routeDescription,
+                    'callbackName'     => $callbackName,
+                    'templateName'     => $templateName
                 ]);
                 $creator->create();
                 echo $creator->getMessage()['status']($creator->getMessage()['message']);

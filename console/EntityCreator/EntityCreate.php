@@ -40,7 +40,7 @@ class EntityCreate extends AbstractCreator
         if ($source) {
             $source = str_replace('/*', '', $source);
             $source = str_replace('EntityName', ucfirst($this->name), $source);
-            $source = str_replace('EntityNameLower', strtolower($this->name), $source);
+            $source = str_replace('entitynamelower', strtolower($this->name), $source);
             file_put_contents(self::MODEL_FOLDER . '/' . ucfirst($this->name) . 'Repository.php', $source);
             return;
         }
@@ -57,7 +57,6 @@ class EntityCreate extends AbstractCreator
             }
             $customPost->addCustomPost();
         }
-
     }
 
     public function create()
