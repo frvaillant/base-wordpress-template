@@ -1,0 +1,25 @@
+#!/usr/bin/env php // Added for syntax coloration in file without extension .php
+<?php
+namespace App\Async;
+
+require_once '../vendor/autoload.php';
+require_once '../../../../wp-load.php';
+
+
+use App\Async\AsyncTaskExecutor;
+use App\Async\AsyncTasksGetter;
+
+
+$recuperator = new AsyncTasksGetter();
+$tasks = $recuperator->getTasksToExecute();
+
+$executor = new AsyncTaskExecutor();
+
+$ids = [];
+foreach ($tasks as $task) {
+    $ids[] = $task->id;
+    $executor->setTask($task);
+    $executor->execute();
+}
+
+$recuperator->updateTasks($ids);
