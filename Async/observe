@@ -15,11 +15,11 @@ $tasks = $recuperator->getTasksToExecute();
 
 $executor = new AsyncTaskExecutor();
 
-$ids = [];
+$results = [];
 foreach ($tasks as $task) {
-    $ids[] = $task->id;
     $executor->setTask($task);
-    $executor->execute();
+    $result = $executor->execute();
+    $results[$task->id] = $result;
 }
 
-$recuperator->updateTasks($ids);
+$recuperator->updateTasks($results);

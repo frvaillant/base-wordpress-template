@@ -17,12 +17,16 @@ class AsyncTasksGetter
         return $this->wpdb->get_results($query);
     }
 
-    public function updateTasks(array $tasksIds)
+    public function updateTasks(array $results)
     {
         $today = new \DateTime('now');
         $now = $today->format('Y-m-d H:i:s');
-        $query = 'UPDATE ' . AsyncConfig::ASYNC_TABLE_NAME . ' SET executed_at="' . $now . '" WHERE id=%d';
-        foreach ($tasksIds as $taskId) {
+        foreach ($results as $taskId => $result) {
+            if($result) {
+                $query = 'DELETE FROM ' . AsyncConfig::ASYNC_TABLE_NAME . ' WHERE id=%d';
+            } else {
+                $query = 'UPDATE ' . AsyncConfig::ASYNC_TABLE_NAME . ' SET executed_at="' . $now . '" WHERE id=%d';
+            }
             $this->wpdb->query(sprintf($query, (int)$taskId));
         }
     }

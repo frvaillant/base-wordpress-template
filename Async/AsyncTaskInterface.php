@@ -5,7 +5,7 @@ namespace App\Async;
 interface AsyncTaskInterface
 {
 
-    public function execute();
+    public function execute(): bool;
     //public function setParameters;
 
 }
