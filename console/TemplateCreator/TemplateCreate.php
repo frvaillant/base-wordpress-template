@@ -72,7 +72,7 @@ class TemplateCreate extends AbstractCreator
         $source = file_get_contents(__DIR__ . '/Files/index.html.twig');
         if($source) {
             $this->createDir(self::VIEW_FOLDER . '/' . $this->twigFolderName);
-            file_put_contents(self::VIEW_FOLDER . '/' . $this->twigFolderName . '/index.html.twig', $source);
+            file_put_contents(self::VIEW_FOLDER . '/' . $this->twigFolderName . '/faq.html.twig', $source);
             return;
         }
         throw new \Exception('Impossible de créer le template twig');

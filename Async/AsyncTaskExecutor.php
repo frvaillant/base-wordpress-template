@@ -19,10 +19,10 @@ class AsyncTaskExecutor
         $this->parameters = (array)$action['params'];
     }
 
-    public function execute()
+    public function execute(): bool
     {
         $task = new $this->className($this->parameters);
-        $task->execute();
+        return $task->execute();
     }
 
 }

@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Controller\AbstractController;
 use App\Model\PostRepository;
+use App\Service\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -18,7 +18,7 @@ class HomeController extends AbstractController
         $repository = new PostRepository();
         $posts = $repository->getLastPost();
 
-        return $this->twig->render('index.html.twig', [
+        return $this->twig->render('faq.html.twig', [
             'posts' => $posts
         ]);
 

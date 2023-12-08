@@ -5,6 +5,6 @@
 
 
 global $injector;
-$controller = $injector->make('App\Controller\HomeController');
+$controller = $injector->make('App\Service\Controller\HomeController');
 
 echo $controller->index();
