@@ -3,7 +3,7 @@
 /**
  * Prepare twig renderer
  */
-$loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/View');
+$loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../View');
 $twig   = new Twig\Environment($loader, [
     'debug' => true,
 ]);
