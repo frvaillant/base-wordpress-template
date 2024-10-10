@@ -21,6 +21,11 @@ abstract class AbstractEntity
      */
     public $post_author;
 
+    /**
+     * @var bool|\WP_User
+     */
+    public $author;
+
     public function __construct($id)
     {
 
@@ -29,7 +34,7 @@ abstract class AbstractEntity
 
         $this->tags = get_the_tags($post->ID);
 
-        if (acf_is_plugin_active()) {
+        if (function_exists('acf_is_plugin_active') && acf_is_plugin_active()) {
             $fields = get_fields($post->ID);
             if($fields) {
                 $this->hydrateEntity($fields);
@@ -41,6 +46,8 @@ abstract class AbstractEntity
         $this->content = $this->post_content;
 
         $this->post_author = get_user_by('ID', $this->post_author);
+
+        $this->author = $this->post_author;
 
     }
 
