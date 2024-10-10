@@ -1,13 +1,62 @@
 {% extends '__base.html.twig' %}
 
 {% block body %}
+    <style>
+        body {
+            margin:0;
+        }
+        .enjoy {
+            position: absolute;
+            top:50%;
+            transform: translateY(-50%);
+            width: 100vw;
+            background: #58bfc3;
+            color: #000;
+            font-family: "arial", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding:0 0 30px 0;
+        }
+        img {
+            margin-top: -110px;
+            /*transform: translateY(-50%);*/
+        }
+        h1 {
+            margin:0;
+            font-size:60px;
+            font-family: "Times", serif;
+            font-style: italic;
+        }
+        p {
+            font-size: 20px;
+        }
 
-<h1>{{ bloginfo('name') }}</h1>
-<h2>{{ bloginfo('description') }}</h2>
+        a {
+            color: #000;
+            text-decoration: underline;
+        }
+    </style>
 
-    <p>it works !</p>
+    <div class="enjoy">
+        <img src="{{ bloginfo('template_directory') }}/assets/images/logo.png" width="200" alt="">
 
-    {% if not acf_is_installed %}
-        Il est recommandé d'installer l'extension <a href="https://fr.wordpress.org/plugins/advanced-custom-fields/">Advanced Custom Fields (ACF)</a>
-    {% endif %}
+        <h1>Hope you'll enjoy</h1>
+
+        <p>it works !</p>
+
+        {% if not acf_is_installed %}
+            <p>
+                Il est recommandé d'installer l'extension <a href="https://fr.wordpress.org/plugins/advanced-custom-fields/">Advanced Custom Fields (ACF)</a>
+            </p>
+        {% endif %}
+    </div>
+
+    <div class="content">
+
+    </div>
+
+
+
 {% endblock %}
