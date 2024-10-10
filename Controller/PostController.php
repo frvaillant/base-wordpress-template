@@ -17,7 +17,7 @@ class PostController extends AbstractController
     {
         $post = get_post(get_the_id());
         $post = new Post($post->ID);
-        return $this->twig->render('Post/single.html.twig', [
+        return $this->twig->render('Post/index.html.twig', [
             'post' => $post
         ]);
     }
