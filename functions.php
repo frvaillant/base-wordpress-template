@@ -1,16 +1,10 @@
 <?php
 require('vendor/autoload.php');
 
-use Auryn\Injector;
-
 include(__DIR__ . '/routes.php');
 
 include(__DIR__ . '/twig.php');
 
-/**
- * Init dependencies injections
- */
-$injector = new Injector;
 
 add_theme_support( 'post-thumbnails' );
 
