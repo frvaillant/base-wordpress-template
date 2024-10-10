@@ -5,20 +5,9 @@
 <h1>{{ bloginfo('name') }}</h1>
 <h2>{{ bloginfo('description') }}</h2>
 
-    {% for post in posts %}
-        <div class="home-post">
-            <h3 class="post-title">
-                {{ post.title }} {# post.post_title works also#}
-            </h3>
-            <div class="post-meta">
-                Posté le {{ post.post_date | date('d-m-Y') }} par {{ post.author.email }}
-            </div>
-            <p>
-                {{ post.content | slice(0,200) | raw }} {# post.post_content works also / use  {{ do_shortcodes(page.content) | raw }} if tou use shortcodes #}
-            </p>
-            <p>
-                <a href="{{ post.guid }}">Lire la suite</a>
-            </p>
-        </div>
-    {% endfor %}
+    <p>it works !</p>
+
+    {% if not acf_is_installed %}
+        Il est recommandé d'installer l'extension <a href="https://fr.wordpress.org/plugins/advanced-custom-fields/">Advanced Custom Fields (ACF)</a>
+    {% endif %}
 {% endblock %}
