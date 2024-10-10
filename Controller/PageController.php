@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
-use App\Entity\Post;
-use App\Controller\AbstractController;
+use App\Entity\Page;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
-class PostController extends AbstractController
+class PageController extends AbstractController
 {
 
     public function __construct()
@@ -14,12 +15,17 @@ class PostController extends AbstractController
         parent::__construct();
     }
 
-    public function single()
+    /**
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws LoaderError
+     */
+    public function page(): string
     {
-        $post = get_post(get_the_id());
-        $post = new Post($post->ID);
-        return $this->twig->render('Post/single.html.twig', [
-            'post' => $post
+        $page = get_post(get_the_id());
+        $page = new Page($page->ID);
+        return $this->twig->render('Page/index.html.twig', [
+            'page' => $page
         ]);
     }
 

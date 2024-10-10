@@ -1,10 +1,10 @@
 <?php
 /*
-Template Name: single-post
+Template Name: page
 */
 
 get_header();
 
-$controller = new \App\Controller\PostController();
+$controller = new \App\Controller\PageController();
 
-echo $controller->single();
+echo $controller->page();

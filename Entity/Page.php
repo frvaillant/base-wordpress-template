@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Entity\AbstractEntity;
 
-class Post extends AbstractEntity
+class Page extends AbstractEntity
 {
 
     public function __construct($postId)
