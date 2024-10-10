@@ -5,7 +5,8 @@ Ce repository propose des bases pour développer un thème wordpress quasiment c
 Rendez vous le dossier "themes" de votre installation de wordpress et clonez y ce repo
 
 Toujours dans ce dossier, lancez y les commandes suivantes :  
-`git init`  
+`git remote remove origin`  
+optionnel : `git remote add origin https//your-origin-repository.com`  
 `composer install`  
 `yarn install`  
 `yarn encore dev`  
