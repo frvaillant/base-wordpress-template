@@ -280,7 +280,7 @@ class RoutesCollector
             if(!$this->matchResponseReturn($method)) {
                 throw new \Exception(
                     sprintf(
-                        'La méthode %s du contôleur %s ne renvoie pas une réponse valide',
+                        'La méthode %s du contrôleur %s ne renvoie pas une réponse valide',
                         $method->getName(),
                         $method->getDeclaringClass()->getName()
                     )
