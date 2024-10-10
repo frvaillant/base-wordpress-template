@@ -19,6 +19,12 @@ $twig->addExtension(new \Twig\Extra\CssInliner\CssInlinerExtension());
  */
 
 $twig->addFunction(
+    new \Twig\TwigFunction('dd', function ($element) {
+        return dd($element);
+    })
+);
+
+$twig->addFunction(
     new \Twig\TwigFunction('page_link', function ($param) {
         return get_page_link($param);
     })
