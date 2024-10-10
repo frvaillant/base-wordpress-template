@@ -17,7 +17,7 @@ class RoutesDetector
 {
     const ROUTE_CLASS = 'Symfony\Component\Routing\Annotation\Route';
 
-    const EXCLUDE_FILES = [
+    const EXCLUDED_FILES = [
         '.',
         '..',
         'AbstractController.php'
@@ -79,7 +79,7 @@ class RoutesDetector
             if ($dh = opendir($folder)){
                 while (($file = readdir($dh)) !== false){
 
-                    if(!in_array($file, self::EXCLUDE_FILES) && !strstr($file, '@')) {
+                    if(!in_array($file, self::EXCLUDED_FILES) && !strstr($file, '@')) {
                         /**
                          * recursive place
                          */
