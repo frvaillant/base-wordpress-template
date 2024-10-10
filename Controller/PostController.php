@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
 use App\Entity\Post;
-use App\Service\Controller\AbstractController;
+use App\Controller\AbstractController;
 
 class PostController extends AbstractController
 {

@@ -5,7 +5,6 @@ Template Name: single-post
 
 get_header();
 
-global $injector;
-$controller = $injector->make('App\Controller\PostController');
+$controller = new \App\Controller\PostController();
 
 echo $controller->single();
