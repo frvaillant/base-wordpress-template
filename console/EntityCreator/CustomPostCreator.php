@@ -10,7 +10,7 @@ function %s_entity() {
 add_action( 'init', '%s_entity', 0 );
 ";
 
-    const FUNCTION_FILE = __DIR__ . '/../../functions.php';
+    const FUNCTION_FILE = __DIR__ . '/../../functions/entities.php';
     private $name;
     private $frenchName;
     private $plurial;
