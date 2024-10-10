@@ -1,10 +1,7 @@
 <?php
-/**
- * @package base-template
- */
 
+use App\Controller\HomeController;
 
-global $injector;
-$controller = $injector->make('App\Service\Controller\HomeController');
+$controller = new HomeController();
 
 echo $controller->index();
