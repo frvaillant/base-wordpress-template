@@ -5,8 +5,7 @@
 /*
 Template Name: FrenchTemplateName
 */
-
-//global $injector;
-//$controller = $injector->make('App\Controller\ControllerNameController');
+// use App\Controller\ControllerNameController;
+//$controller = new ControllerNameController;
 
 //echo $controller->index();

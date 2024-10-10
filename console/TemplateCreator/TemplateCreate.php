@@ -47,7 +47,7 @@ class TemplateCreate extends AbstractCreator
             $source = str_replace('FrenchTemplateName', $this->frenchName, $source);
             $source = str_replace('ControllerName', $this->templateName, $source);
             $source = str_replace('//', '', $source);
-            file_put_contents(self::TEMPLATE_FOLDER . '/' . ucfirst($this->templateName) . 'Template.php', $source);
+            file_put_contents(self::TEMPLATE_FOLDER . '/' . ucfirst($this->templateName) . '.php', $source);
             return;
         }
         throw new \Exception('Le fichier source est introuvable');
@@ -72,7 +72,7 @@ class TemplateCreate extends AbstractCreator
         $source = file_get_contents(__DIR__ . '/Files/index.html.twig');
         if($source) {
             $this->createDir(self::VIEW_FOLDER . '/' . $this->twigFolderName);
-            file_put_contents(self::VIEW_FOLDER . '/' . $this->twigFolderName . '/faq.html.twig', $source);
+            file_put_contents(self::VIEW_FOLDER . '/' . $this->twigFolderName . '/index.html.twig', $source);
             return;
         }
         throw new \Exception('Impossible de créer le template twig');
