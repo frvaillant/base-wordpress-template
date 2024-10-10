@@ -1,5 +1,4 @@
 {
-    "name": "francois/yourname",
     "authors": [
         {
             "name": "francoisvaillant",
@@ -13,7 +12,6 @@
     },
     "require": {
         "twig/twig": "^3.0",
-        "rdlowrey/auryn": "^1.4",
         "symfony/webpack-encore-bundle": "^1.11",
         "symfony/form": "^5.4",
         "symfony/twig-bridge": "^5.4",
