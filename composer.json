@@ -24,6 +24,7 @@
         "twig/cssinliner-extra": "^3.3",
         "symfony/routing": "^5.4",
         "doctrine/common": "^3.4",
-        "doctrine/annotations": "^1.14"
+        "doctrine/annotations": "^1.14",
+        "symfony/finder": "^5.4"
     }
 }

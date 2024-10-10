@@ -4,12 +4,11 @@ namespace App\functions;
 
 use App\Router\Router;
 
-$router = new Router();
-
+$_ROUTER = new Router();
 add_action( 'init', function () {
-    global $router;
-    if($router->getMatch()) {
-        $router->execute();
+    global $_ROUTER;
+    if($_ROUTER->match()) {
+        $_ROUTER->execute();
         die;
     }
 } );
