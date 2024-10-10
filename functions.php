@@ -7,21 +7,6 @@ include(__DIR__ . '/routes.php');
 
 include(__DIR__ . '/twig.php');
 
-
-
-function dd($data) {
-    echo '<pre>';
-        var_dump($data);
-    echo '</pre>';
-    die;
-}
-
-function dump($data) {
-    echo '<pre>';
-        var_dump($data);
-    echo '</pre>';
-}
-
 /**
  * Init dependencies injections
  */
