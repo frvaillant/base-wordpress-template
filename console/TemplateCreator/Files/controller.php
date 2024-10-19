@@ -15,11 +15,9 @@ class ControllerNameController extends AbstractController
 
     public function index()
     {
-
-        return $this->twig->render('ControllerName/index.html.twig', [
-
-        ]);
-
+        return $this->publish(
+            $this->twig->render('ControllerName/index.html.twig', [
+            ])
+        );
     }
-
 }
