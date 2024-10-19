@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Annotations\Entity;
 use App\Entity\AbstractEntity;
 
 class Page extends AbstractEntity

@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Page;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
+/**
+ *
+ */
 class PageController extends AbstractController
 {
 
@@ -22,13 +24,15 @@ class PageController extends AbstractController
      * @throws SyntaxError
      * @throws LoaderError
      */
-    public function page(): string
+    public function page(): Response
     {
         $page = get_post(get_the_id());
         $page = new Page($page->ID);
-        return $this->twig->render('Page/index.html.twig', [
-            'page' => $page
-        ]);
+        return $this->publish(
+            $this->twig->render('Page/index.html.twig', [
+                'page' => $page
+            ])
+        );
     }
 
 }

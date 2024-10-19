@@ -7,7 +7,7 @@
  * @param $plurial
  */
 
-function create_custom_post_type($entityName, $singular, $plurial)
+function create_custom_post_type($entityName, $singular, $plurial, $supports = ['title', 'author', 'revisions', 'custom-fields', 'tags', 'page-attributes'])
 {
     // On rentre les différentes dénominations de notre custom post type qui seront affichées dans l'administration
     $labels = array(
@@ -36,7 +36,7 @@ function create_custom_post_type($entityName, $singular, $plurial)
         'description'         => __( 'Tous sur les ' . $plurial),
         'labels'              => $labels,
         // On définit les options disponibles dans l'éditeur de notre custom post type ( un titre, un auteur...)
-        'supports'            => array( 'title', 'author', 'revisions', 'custom-fields', 'tags', 'page-attributes'),
+        'supports'            => $supports,
         'taxonomies'          => array($entityName,  'post_tag' ),
         /*
         * Différentes options supplémentaires
@@ -53,9 +53,13 @@ function create_custom_post_type($entityName, $singular, $plurial)
 }
 
 
-/*
-function section_entity() {
-    create_custom_post_type('section', 'section', 'sections');
+
+function entities() {
+    $entityCollector = new \App\Collectors\EntitiesCollector();
+    /** @var \App\Annotations\Entity $entity */
+    foreach ($entityCollector->getEntities() as $entity) {
+        create_custom_post_type($entity->getName(), $entity->getSingular(), $entity->getPlural());
+    }
 }
-add_action( 'init', 'section_entity', 0 );
-*/
+add_action( 'init', 'entities', 0 );
+

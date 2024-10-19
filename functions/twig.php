@@ -6,6 +6,7 @@
 $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../View');
 $twig   = new Twig\Environment($loader, [
     'debug' => true,
+    'autoescape' => false
 ]);
 
 /**

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
+
 class HomeController extends AbstractController
 {
 
@@ -16,11 +18,13 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index(): string
+    public function index(): Response
     {
-        return $this->twig->render('index.html.twig', [
-            'acf_is_installed' => function_exists('acf_is_plugin_active') && acf_is_plugin_active()
-        ]);
+        return $this->publish(
+            $this->twig->render('index.html.twig', [
+                'acf_is_installed' => function_exists('acf_is_plugin_active') && acf_is_plugin_active()
+            ])
+        );
     }
 
 }
