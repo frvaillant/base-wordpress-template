@@ -288,6 +288,7 @@ class RoutesCollector
             }
             $route     = $this->getRoute($method);
             $arguments = $this->getMethodArguments($method);
+
             $arguments['_controller'] = $class->getName() . '::' . $method->getName();
             /**
              * check if route exits in wordpress as page or post
@@ -296,9 +297,17 @@ class RoutesCollector
             if (substr($routePathWithoutVariables, 0, 1) !== '/') {
                 $routePathWithoutVariables = '/' . $routePathWithoutVariables;
             }
-
             $this->routesPaths[get_bloginfo('url') . $routePathWithoutVariables . '/'] = $method;
-            $this->routes->add($route->getName(), new Route($route->getPath(), $arguments));
+            $this->routes->add($route->getName(), new Route(
+                $route->getPath(),
+                $arguments,
+                $route->getRequirements(),
+                $route->getOptions(),
+                $route->getHost(),
+                $route->getSchemes(),
+                $route->getMethods(),
+                $route->getCondition()
+            ));
         }
     }
 
