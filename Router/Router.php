@@ -5,6 +5,7 @@ namespace App\Router;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
@@ -139,6 +140,22 @@ class Router
         } catch (ResourceNotFoundException $e) {
             return false;
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function methodIsAllowed(): bool
+    {
+        $route = $this->matcher->match($this->getPath());
+        $route = $route['_route'] ?? null;
+        if(
+            $route
+            && !in_array($this->request->getMethod(), $this->routes->get($route)->getMethods())
+        ) {
+            throw new MethodNotAllowedException($this->routes->get($route)->getMethods(), 'Method ' . $this->request->getMethod() . ' not allowed on route ' . $route);
+        }
+        return true;
     }
 
 
