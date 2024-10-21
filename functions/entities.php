@@ -1,5 +1,8 @@
 <?php
 
+use App\Annotations\Entity;
+use App\Collectors\EntitiesCollector;
+
 /**
  * Entités complémentaires
  * @param $entityName
@@ -57,9 +60,9 @@ function create_custom_post_type($entityName, $singular, $plurial, $supports = [
  */
 function entities(): void
 {
-    $entityCollector = new \App\Collectors\EntitiesCollector();
+    $entityCollector = new EntitiesCollector();
 
-    /** @var \App\Annotations\Entity $entity */
+    /** @var Entity $entity */
     foreach ($entityCollector->getEntities() as $entity) {
         create_custom_post_type($entity->getName(), $entity->getSingular(), $entity->getPlural());
     }
