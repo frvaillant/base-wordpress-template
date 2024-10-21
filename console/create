@@ -13,7 +13,7 @@ if($action === 'entity') {
 }
 
 if($action === 'template') {
-    $className          = readline('Nom de la classe (Post, Article ...) :');
+    $className          = readline('slug :');
     $frenchTemplateName = readline('Son nom en Francais (Affichage article; page publication ...) :');
 }
 

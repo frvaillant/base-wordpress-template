@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Controller\AbstractController;
+use App\Annotations\Template;
 
 class ControllerNameController extends AbstractController
 {

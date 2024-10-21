@@ -23,7 +23,6 @@ class Template
      */
     private string $controller;
 
-
     /**
      * @var string
      */

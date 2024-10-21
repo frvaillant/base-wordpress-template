@@ -10,22 +10,31 @@ class TemplateCreate extends AbstractCreator
     private $templateName;
     private $frenchName;
 
-    const TEMPLATE_FOLDER = __DIR__ . '/../../Templates';
     const CONTROLLER_FOLDER = __DIR__ . '/../../Controller';
     const VIEW_FOLDER = __DIR__ . '/../../View';
+
+    const ANNOTATION = '
+/**
+* @Template(identifier="%s", name="%s")
+**/
+';
+
     /**
      * @var string
      */
     private $twigFolderName;
+    private string $slug;
 
     public function __construct($arguments)
     {
-        if(!is_dir(self::TEMPLATE_FOLDER)) {
-            mkdir(self::TEMPLATE_FOLDER);
-        }
+
         $names = explode(' ', $arguments['className']);
         $this->templateName = implode('', array_map(function($value) {
             return ucfirst($value);
+        }, $names));
+
+        $this->slug = implode('-', array_map(function($value) {
+            return $value;
         }, $names));
 
         $this->twigFolderName = ucfirst(implode('_', array_map(function($value) {
@@ -33,25 +42,6 @@ class TemplateCreate extends AbstractCreator
         }, $names)));
 
         $this->frenchName = $arguments['frenchName'];
-
-        if(!is_dir(self::CONTROLLER_FOLDER)) {
-
-        }
-
-    }
-
-    private function createTemplate()
-    {
-        $source = file_get_contents(__DIR__ . '/Files/template.php');
-        if($source) {
-            $source = str_replace('FrenchTemplateName', $this->frenchName, $source);
-            $source = str_replace('ControllerName', $this->templateName, $source);
-            $source = str_replace('//', '', $source);
-            file_put_contents(self::TEMPLATE_FOLDER . '/' . ucfirst($this->templateName) . '.php', $source);
-            return;
-        }
-        throw new \Exception('Le fichier source est introuvable');
-
     }
 
     private function createController()
@@ -60,6 +50,8 @@ class TemplateCreate extends AbstractCreator
         if($source) {
             $source = str_replace('ControllerName', $this->templateName, $source);
             $source = str_replace('/*', '', $source);
+            $annotation = sprintf(self::ANNOTATION, $this->slug, $this->frenchName);
+            $source = str_replace('public function index', $annotation . 'public function index', $source);
             file_put_contents(self::CONTROLLER_FOLDER . '/' . ucfirst($this->templateName) . 'Controller.php', $source);
             return;
         }
@@ -67,7 +59,7 @@ class TemplateCreate extends AbstractCreator
 
     }
 
-    private function createTwig()
+    private function createTwig(): void
     {
         $source = file_get_contents(__DIR__ . '/Files/index.html.twig');
         if($source) {
@@ -78,10 +70,9 @@ class TemplateCreate extends AbstractCreator
         throw new \Exception('Impossible de créer le template twig');
     }
 
-    public function create()
+    public function create(): void
     {
         try {
-            $this->createTemplate();
             $this->createController();
             $this->createTwig();
             $this->success = "Créations du template, controller et fichier twig réussies";
