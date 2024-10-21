@@ -1,8 +1,12 @@
 <?php
-
+/**
+ * This annotation is made to be used on a controller method
+ * For example : @Template(identifier="videos", name="Page de présenttaion des videos")
+ */
 namespace App\Annotations;
 
 use Doctrine\Common\Annotations\Annotation;
+
 
 /**
  * @Annotation

@@ -8,11 +8,23 @@ class TemplateCreate extends AbstractCreator
      * @var string
      */
     private $templateName;
+    /**
+     * @var mixed
+     */
     private $frenchName;
 
+    /**
+     *
+     */
     const CONTROLLER_FOLDER = __DIR__ . '/../../Controller';
+    /**
+     *
+     */
     const VIEW_FOLDER = __DIR__ . '/../../View';
 
+    /**
+     *
+     */
     const ANNOTATION = '
 /**
 * @Template(identifier="%s", name="%s")
@@ -23,8 +35,14 @@ class TemplateCreate extends AbstractCreator
      * @var string
      */
     private $twigFolderName;
+    /**
+     * @var string
+     */
     private string $slug;
 
+    /**
+     * @param $arguments
+     */
     public function __construct($arguments)
     {
 
@@ -44,6 +62,10 @@ class TemplateCreate extends AbstractCreator
         $this->frenchName = $arguments['frenchName'];
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     private function createController()
     {
         $source = file_get_contents(__DIR__ . '/Files/controller.php');
@@ -59,6 +81,10 @@ class TemplateCreate extends AbstractCreator
 
     }
 
+    /**
+     * @return void
+     * @throws Exception
+     */
     private function createTwig(): void
     {
         $source = file_get_contents(__DIR__ . '/Files/index.html.twig');
@@ -70,6 +96,9 @@ class TemplateCreate extends AbstractCreator
         throw new \Exception('Impossible de créer le template twig');
     }
 
+    /**
+     * @return void
+     */
     public function create(): void
     {
         try {

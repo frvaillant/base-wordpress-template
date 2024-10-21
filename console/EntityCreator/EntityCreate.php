@@ -6,9 +6,16 @@ class EntityCreate extends AbstractCreator
 {
 
     const ENTITY_FOLDER = __DIR__ . '/../../Entity';
+
     const MODEL_FOLDER = __DIR__ . '/../../Model';
-    private $arguments;
-    private $name;
+    /**
+     * @var array
+     */
+    private array $arguments;
+    /**
+     * @var string
+     */
+    private string $name;
 
     const ANNOTATION = '
 /**
@@ -16,6 +23,9 @@ class EntityCreate extends AbstractCreator
  */
 ';
 
+    /**
+     * @param array $arguments
+     */
     public function __construct(array $arguments)
     {
         $this->arguments = $arguments;
@@ -27,7 +37,11 @@ class EntityCreate extends AbstractCreator
     }
 
 
-    private function createEntityFile()
+    /**
+     * @return void
+     * @throws Exception
+     */
+    private function createEntityFile(): void
     {
         $source = file_get_contents(__DIR__ . '/Files/entity.php');
         if ($source) {
@@ -41,7 +55,11 @@ class EntityCreate extends AbstractCreator
         throw new \Exception('Entity source file is not found');
     }
 
-    private function createRepository()
+    /**
+     * @return void
+     * @throws Exception
+     */
+    private function createRepository(): void
     {
         $source = file_get_contents(__DIR__ . '/Files/repository.php');
         if ($source) {
@@ -56,7 +74,10 @@ class EntityCreate extends AbstractCreator
     }
 
 
-    public function create()
+    /**
+     * @return void
+     */
+    public function create(): void
     {
         try {
             $this->createEntityFile();

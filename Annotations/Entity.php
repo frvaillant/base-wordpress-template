@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * This annotation is made to be used on a Entity class
+ * For example : @Entity(name="Video", singular="vidéo", plural="vidéos")
+ * It generates a WP CPT (custom post) to be managed in dashboard
+ */
 namespace App\Annotations;
 
 use Doctrine\Common\Annotations\Annotation;
@@ -10,9 +14,21 @@ use Doctrine\Common\Annotations\Annotation;
 class Entity
 {
 
+    /**
+     * @var string|mixed
+     */
     private string $name;
+    /**
+     * @var string|mixed
+     */
     private string $singular;
+    /**
+     * @var string|mixed
+     */
     private string $plural;
+    /**
+     * @var array|mixed|string[]
+     */
     private array $supports = ['title', 'author', 'revisions', 'custom-fields', 'tags', 'page-attributes'];
 
     /**
@@ -97,17 +113,19 @@ class Entity
     /**
      * @return array
      */
-    public function getOptions(): array
+    public function getSupports(): array
     {
-        return $this->options;
+        return $this->supports;
     }
 
     /**
-     * @param array $options
+     * @param array $supports
      */
-    public function setOptions(array $options): void
+    public function setSupports(array $supports): void
     {
-        $this->options = $options;
+        $this->supports = $supports;
     }
+
+
 
 }
