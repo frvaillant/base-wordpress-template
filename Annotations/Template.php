@@ -108,9 +108,4 @@ class Template
     {
         $this->method = $method;
     }
-
-
-
-
-
 }

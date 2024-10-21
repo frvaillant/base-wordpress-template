@@ -125,7 +125,4 @@ class Entity
     {
         $this->supports = $supports;
     }
-
-
-
 }
