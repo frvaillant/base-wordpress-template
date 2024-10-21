@@ -1,6 +1,5 @@
 <?php
 
-require_once ( __DIR__ . '/CustomPostCreator.php');
 require_once (__DIR__ . '/../AbstractCreator.php');
 
 class EntityCreate extends AbstractCreator
@@ -10,6 +9,12 @@ class EntityCreate extends AbstractCreator
     const MODEL_FOLDER = __DIR__ . '/../../Model';
     private $arguments;
     private $name;
+
+    const ANNOTATION = '
+/**
+ * @Entity(name="%s", singular="%s", plural="%s")
+ */
+';
 
     public function __construct(array $arguments)
     {
@@ -28,6 +33,8 @@ class EntityCreate extends AbstractCreator
         if ($source) {
             $source = str_replace('/*', '', $source);
             $source = str_replace('EntityName', ucfirst($this->name), $source);
+            $annotation = sprintf(self::ANNOTATION, ucfirst($this->name), $this->arguments['singular'], $this->arguments['plurial']);
+            $source = str_replace('class', $annotation . 'class', $source);
             file_put_contents(self::ENTITY_FOLDER . '/' . ucfirst($this->name) . '.php', $source);
             return;
         }
@@ -48,23 +55,12 @@ class EntityCreate extends AbstractCreator
 
     }
 
-    private function addCustomPost()
-    {
-        if (isset($this->arguments['singular']) && isset($this->arguments['plurial'])) {
-            $customPost = new CustomPostCreator($this->name, $this->arguments['singular'], $this->arguments['plurial']);
-            if(!$customPost) {
-                throw new \Exception('Impossible d\'instancier un custom post pour ' . $this->name);
-            }
-            $customPost->addCustomPost();
-        }
-    }
 
     public function create()
     {
         try {
             $this->createEntityFile();
             $this->createRepository();
-            $this->addCustomPost();
             $this->success = "Créations de l'entité et du repository réussies";
         } catch (\Exception $e) {
             $this->error = $e->getMessage();

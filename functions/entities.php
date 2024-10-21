@@ -53,7 +53,6 @@ function create_custom_post_type($entityName, $singular, $plurial, $supports = [
 }
 
 
-
 function entities() {
     $entityCollector = new \App\Collectors\EntitiesCollector();
     /** @var \App\Annotations\Entity $entity */
