@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "core-js": "^3.9.1",
-    "swiper": "^6.5.4"
+    "swiper": "^6.5.4",
+    "@hotwired/stimulus": "^3.1.0",
+    "@hotwired/stimulus-webpack-helpers": "^1.0.1"
   }
 }
