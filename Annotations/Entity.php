@@ -18,19 +18,35 @@ class Entity
      * @var string|mixed
      */
     private string $name;
+
     /**
      * @var string|mixed
      */
     private string $singular;
+
     /**
      * @var string|mixed
      */
     private string $plural;
+
     /**
      * @var array|mixed|string[]
      */
-    private array $supports = ['title', 'author', 'revisions', 'custom-fields', 'tags', 'page-attributes'];
-
+    private array $supports = [
+        'title',
+        'editor',
+        'author',
+        'thumbnail',
+        'excerpt',
+        'trackbacks',
+        'custom-fields',
+        'comments',
+        'revisions',
+        'page-attributes',
+        'post-formats',
+        'menu_order',
+        'sticky',
+    ];
     /**
      * @throws \Exception
      */
