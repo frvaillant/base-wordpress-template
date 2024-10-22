@@ -26,7 +26,7 @@ abstract class AbstractEntity
      */
     public $author;
 
-    public function __construct($id)
+    public function __construct(string | int $id)
     {
 
         $post   = get_post($id);
@@ -51,7 +51,8 @@ abstract class AbstractEntity
 
     }
 
-    private function hydrateEntity($array) {
+    private function hydrateEntity($array): void
+    {
         foreach ($array as $key => $value) {
             $this->{$key} = $value;
         }
