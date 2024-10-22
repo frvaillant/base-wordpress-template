@@ -6,6 +6,9 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 abstract class AbstractController
 {
@@ -41,6 +44,19 @@ abstract class AbstractController
         $this->response->setContent($content);
         $this->response->setStatusCode(200);
         return $this->response->send();
+    }
+
+
+    /**
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws LoaderError
+     */
+    protected function render(string $template, array $params = []): Response
+    {
+        return $this->publish(
+            $this->twig->render($template, $params)
+        );
     }
 
     /**

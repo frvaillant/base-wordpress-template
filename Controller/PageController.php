@@ -28,11 +28,10 @@ class PageController extends AbstractController
     {
         $page = get_post(get_the_id());
         $page = new Page($page->ID);
-        return $this->publish(
-            $this->twig->render('Page/index.html.twig', [
+        return $this->render('Page/index.html.twig', [
                 'page' => $page
-            ])
-        );
+            ]);
+
     }
 
 }
