@@ -212,3 +212,13 @@ Compilez avec `yarn encore dev`
 Vous pouvez également utiliser stimulus dans votre thème.
 
 ## Notes sur l'injection de dépendances et le param converter
+
+```PHP 
+    /**
+     * @Route("/formation-author/{formation}", name="formation_author", methods={"GET", "POST"})
+     */
+    public function formationAuthor(Formation $formation): Response
+    {
+    }
+```
+En procédant ainsi sur les routes déclarées avec l'annotation @Route, le param converter instanciera automatiquement votre formation à partir de l'id fourni en paramètre.  
