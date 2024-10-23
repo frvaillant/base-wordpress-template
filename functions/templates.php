@@ -1,6 +1,8 @@
 <?php
+use App\Router\DependencyInjection\DependencyInjector;
+use App\Collectors\TemplatesCollector;
 
-$templatesCollector = new \App\Collectors\TemplatesCollector();
+$templatesCollector = new TemplatesCollector();
 $theme_templates = $templatesCollector->getTemplates();
 
 /** @var \App\Annotations\Template $templateInformations */
@@ -23,7 +25,13 @@ foreach ($theme_templates as $templateInformations) {
         if ($page_template === $templateInformations->getIdentifier()) {
             $controllerName = $templateInformations->getController();
             $controller = new $controllerName();
-            $controller->{$templateInformations->getMethod()}();
+            $parameters = [];
+
+            $injector = new DependencyInjector($controllerName);
+
+            $injector->autoloadDependencies($templateInformations, $parameters);
+
+            $controller->{$templateInformations->getMethod()}(...$parameters);
             exit;
         }
 

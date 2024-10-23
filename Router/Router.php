@@ -2,6 +2,8 @@
 
 namespace App\Router;
 
+use App\Entity\Page;
+use App\Router\DependencyInjection\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
@@ -159,12 +161,20 @@ class Router
     }
 
 
+    /**
+     * @throws \ReflectionException
+     */
     public function execute()
     {
         $controllerResolver = new ControllerResolver();
         $controller = $controllerResolver->getController($this->getRequest());
+
         $argumentsResolver = new ArgumentResolver();
         $arguments = $argumentsResolver->getArguments($this->getRequest(), $controller);
+
+        $paramConverter = new ParamConverter($controller);
+        $paramConverter->convert($arguments);
+
         call_user_func_array($controller, $arguments);
     }
 
