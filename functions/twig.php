@@ -15,15 +15,7 @@ $twig   = new Twig\Environment($loader, [
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $twig->addExtension(new \Twig\Extra\CssInliner\CssInlinerExtension());
-/**
- * Add function to twig to get global informations
- */
 
-$twig->addFunction(
-    new \Twig\TwigFunction('dd', function ($element) {
-        return dd($element);
-    })
-);
 
 $twig->addFunction(
     new \Twig\TwigFunction('page_link', function ($param) {
@@ -39,7 +31,7 @@ $twig->addFunction(
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('isUserLoggedIn', function () {
+    new \Twig\TwigFunction('is_user_logged_in', function () {
         return is_user_logged_in();
     })
 );
@@ -81,21 +73,20 @@ $twig->addFunction(
 );
 
 $twig->addFunction(
+    new \Twig\TwigFunction('wp_footer', function () {
+        return wp_footer();
+    })
+);
+
+$twig->addFunction(
     new \Twig\TwigFunction('header', function () {
         return wp_head();
     })
 );
 
-
 $twig->addFunction(
-    new \Twig\TwigFunction('previous_post_link', function () {
-        return previous_post_link();
-    })
-);
-
-$twig->addFunction(
-    new \Twig\TwigFunction('next_post_link', function () {
-        return next_post_link();
+    new \Twig\TwigFunction('wp_head', function () {
+        return wp_head();
     })
 );
 
@@ -107,3 +98,4 @@ $twig->addFunction(
 
 
 $twig->addGlobal('_get', $_GET);
+$twig->addGlobal('_post', $_POST);
