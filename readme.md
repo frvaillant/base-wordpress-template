@@ -221,4 +221,13 @@ Vous pouvez également utiliser stimulus dans votre thème.
     {
     }
 ```
-En procédant ainsi sur les routes déclarées avec l'annotation @Route, le param converter instanciera automatiquement votre formation à partir de l'id fourni en paramètre.  
+En procédant ainsi sur les routes déclarées avec l'annotation @Route, le param converter instanciera automatiquement votre formation à partir de l'id fourni en paramètre.
+
+
+Sur les méthodes des controlleurs utilisant l'annotation @Route ou @Template, vous pouvez injecter tous les services dont
+vous avez besoin à condition que ces services puissent être instanciés en faisant :
+```PHP 
+    $service = new MonService()
+```
+
+Une injection de dépendances plus performante arrive bientôt.
