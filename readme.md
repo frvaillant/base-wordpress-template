@@ -135,9 +135,8 @@ Ainsi dans votre controlleur, vous pouvez désormais :
 /**
 * @Template(identifier="formation", name="Formation")
 **/
-public function index()
+public function index(FormationRepository $formationRepository)
     {
-        $formationRepository = new \App\Model\FormationRepository();
         $page = new \App\Entity\Page(get_the_ID());
         $formations =$formationRepository->findAll();
         return $this->publish(
@@ -187,22 +186,23 @@ Vous pouvez implémenter des fonctions twig ou des filtres :
 ```
 ### Besoin d'une route (URL) spécifique sans pour autant créer une page
 Dans votre controller créez une méthode et ajoutez lui l'annotation @Route (Symfony\Component\Routing\Annotation\Route) : 
+
 ```PHP 
-/**
- * @Route("/formation-author/{formation}", name="formation_author", methods={"GET", "POST"})
- */
-public function formationAuthor(int $formation): Response
-{
-    $formation = new Formation($formation);
-    $author = $formation->author; //This return a WP_User object
-    return $this->publish(
-        $this->twig->render('Formation/index.html.twig', [
-            'author' => $author
-        ])
-    );
-}
+    /**
+     * @Route("/formation-author/{formation}", name="formation_author", methods={"GET", "POST"})
+     */
+    public function formationAuthor(Formation $formation): Response
+    {
+        $author = $formation->author; //This return a WP_User object
+        return $this->publish(
+            $this->twig->render('Formation/index.html.twig', [
+                'author' => $author
+            ])
+        );
+    }
 ```
-Attention, les méthodes qui utilisent l'annotation @RToute doivent renvoyer une réponse de type Symfony\Component\HttpFoundation\Response et être typées comme tel.  
+
+Attention, les méthodes qui utilisent l'annotation @Route doivent renvoyer une réponse de type Symfony\Component\HttpFoundation\Response et être typées comme tel.  
 
 ### Style et javascript
 
@@ -210,3 +210,5 @@ Comme dans symfony, utilisez le dossier assets pour ajouter votre css (avec scss
 Compilez avec `yarn encore dev`  
 
 Vous pouvez également utiliser stimulus dans votre thème.
+
+## Notes sur l'injection de dépendances et le param converter
