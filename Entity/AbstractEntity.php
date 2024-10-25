@@ -26,6 +26,8 @@ abstract class AbstractEntity
      */
     public $author;
 
+    public $fields = [];
+
     public function __construct(string | int $id)
     {
 
@@ -56,8 +58,13 @@ abstract class AbstractEntity
     private function hydrateEntity($array): void
     {
         foreach ($array as $key => $value) {
-            $this->{$key} = $value;
+            $this->fields[$key] = $value;
         }
+    }
+
+    public function __get(string $name)
+    {
+        return $this->fields[$name] ?? null;
     }
 
 }
