@@ -1,4 +1,4 @@
-#!/usr/bin/env php // Added for syntax coloration in file without extension .php
+#!/usr/bin/env php
 <?php
 
 require_once ( __DIR__ . '/EntityCreator/EntityCreate.php');
