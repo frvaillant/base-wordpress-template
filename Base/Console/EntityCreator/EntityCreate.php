@@ -1,16 +1,15 @@
 <?php
 
-namespace TemplateCreator\EntityCreator;
-use AbstractCreator;
+namespace App\Base\Console\EntityCreator;
 
-require_once(__DIR__ . '/../AbstractCreator.php');
+use App\Base\Console\AbstractCreator;
 
-class EntityCreate extends AbstractCreator
+final class EntityCreate extends AbstractCreator
 {
 
-    const ENTITY_FOLDER = __DIR__ . '/../../Entity';
+    public const ENTITY_FOLDER = __DIR__ . '/../../../Entity';
 
-    const MODEL_FOLDER = __DIR__ . '/../../Model';
+    public const MODEL_FOLDER = __DIR__ . '/../../../Model';
     /**
      * @var array
      */
@@ -20,7 +19,7 @@ class EntityCreate extends AbstractCreator
      */
     private string $name;
 
-    const ANNOTATION = '
+    public const ANNOTATION = '
 /**
  * @Entity(name="%s", singular="%s", plural="%s")
  */
@@ -33,7 +32,7 @@ class EntityCreate extends AbstractCreator
     {
         $this->arguments = $arguments;
         $names = explode(' ', $arguments['entity']);
-        $this->name = implode('', array_map(function ($value) {
+        $this->name = implode('', array_map(function($value) {
             return ucfirst($value);
         }, $names));
 

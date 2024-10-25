@@ -1,15 +1,16 @@
 <?php
 
-
 namespace App\Model;
 
-
-use App\Entity\Section;
-
-class EntityProvider
+final class EntityProvider
 {
 
-   public function provide($queryResults, $className)
+    /**
+     * @param $queryResults
+     * @param $className
+     * @return array
+     */
+    public function provide($queryResults, $className): array
     {
         $results = [];
         foreach ($queryResults as $result) {

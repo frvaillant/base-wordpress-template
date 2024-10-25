@@ -20,7 +20,9 @@ foreach ($theme_templates as $templateInformations) {
     /**
      * Adding controllers to templates
      */
-    add_filter('template_include', function($template) use($templateInformations) {
+    add_filter(/**
+     * @throws ReflectionException
+     */ 'template_include', function($template) use($templateInformations) {
         $page_template = get_page_template_slug();
 
         if ($page_template === $templateInformations->getIdentifier()) {

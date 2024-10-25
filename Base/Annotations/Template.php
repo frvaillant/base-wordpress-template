@@ -11,7 +11,7 @@ use Doctrine\Common\Annotations\Annotation;
 /**
  * @Annotation
  */
-class Template
+final class Template
 {
     /**
      * @var string
@@ -52,27 +52,11 @@ class Template
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @return string
      */
     public function getIdentifier(): string
     {
         return $this->identifier;
-    }
-
-    /**
-     * @param string $identifier
-     */
-    public function setIdentifier(string $identifier): void
-    {
-        $this->identifier = $identifier;
     }
 
     /**
@@ -87,7 +71,7 @@ class Template
     /**
      * @param string $controller
      */
-    public function setController(string $controller): void
+    public function defineController(string $controller): void
     {
         $this->controller = $controller;
     }
@@ -103,7 +87,7 @@ class Template
     /**
      * @param string $method
      */
-    public function setMethod(string $method): void
+    public function defineControllerMethod(string $method): void
     {
         $this->method = $method;
     }

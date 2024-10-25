@@ -8,7 +8,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-class PostController extends AbstractController
+final class PostController extends AbstractController
 {
 
     public function __construct()
@@ -25,9 +25,9 @@ class PostController extends AbstractController
     {
         $post = get_post(get_the_id());
         $post = new Post($post->ID);
-        return  $this->render('Post/index.html.twig', [
-                'post' => $post
-            ]);
+        return $this->render('Post/index.html.twig', [
+            'post' => $post
+        ]);
     }
 }
 

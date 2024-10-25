@@ -13,7 +13,7 @@ use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
-class Router
+final class Router
 {
 
     /**
@@ -44,7 +44,7 @@ class Router
     /**
      * @var array
      */
-    protected array $wordpressUrls = [];
+    private array $wordpressUrls = [];
 
     /**
      * @throws \ReflectionException
@@ -117,7 +117,7 @@ class Router
         $this->routesPaths = $this->routesCollector->getRoutesPaths();
     }
 
-    public function addRoute(string $routeId, Route $route)
+    public function addRoute(string $routeId, Route $route): void
     {
         $this->routes->add($routeId, $route);
     }
@@ -132,7 +132,7 @@ class Router
         $this->matcher = new UrlMatcher($this->getRoutes(), $context);
     }
 
-    public function match()
+    public function match(): bool|array
     {
         try {
             $this->request->attributes->add($this->matcher->match($this->getPath()));
@@ -164,7 +164,7 @@ class Router
     /**
      * @throws \ReflectionException
      */
-    public function execute()
+    public function execute(): void
     {
         $controllerResolver = new ControllerResolver();
         $controller = $controllerResolver->getController($this->getRequest());

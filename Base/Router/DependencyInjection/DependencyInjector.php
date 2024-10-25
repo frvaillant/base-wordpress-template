@@ -2,8 +2,11 @@
 
 namespace App\Base\Router\DependencyInjection;
 
-class DependencyInjector
+final class DependencyInjector
 {
+
+    private string $controllerName;
+    private \ReflectionClass $class;
 
     public function __construct(string $controllerName)
     {
@@ -22,7 +25,7 @@ class DependencyInjector
     {
         foreach($this->class->getMethod($templateInformations->getMethod())->getParameters() as $parameter) {
             $className = $parameter?->getType()?->getName();
-            $parameters[] = $className ? new $className : null;
+            $parameters[] = $className ? new $className() : null;
         }
     }
 

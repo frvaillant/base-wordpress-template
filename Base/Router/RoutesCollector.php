@@ -14,19 +14,19 @@ use Symfony\Component\Routing\RouteCollection;
  * This class parses the Controller folder. It gets all *Controller.php files and extracts @Route annotations
  * Finally, il returns a RouteCollection
  */
-class RoutesCollector
+final class RoutesCollector
 {
     use PlurialTrait;
 
     /**
      * Annotation @Route FQCN
      */
-    const ROUTE_CLASS = 'Symfony\Component\Routing\Annotation\Route';
+    public const ROUTE_CLASS = 'Symfony\Component\Routing\Annotation\Route';
 
     /**
      * Files to ignore when inspecting folder
      */
-    const EXCLUDED_FOLDERS = [
+    public const EXCLUDED_FOLDERS = [
             'vendor',
             'assets',
             'Async',
@@ -145,7 +145,7 @@ class RoutesCollector
     /**
      *
      */
-    private function checkErrors()
+    private function checkErrors(): void
     {
         $this->getAllWordpressUrl();
         $common = array_intersect_key($this->wordpressUrls, $this->routesPaths);
@@ -191,28 +191,28 @@ class RoutesCollector
     /**
      * Adds error notice in wordpress back office if routes conflicts
      */
-    private function addWordpressAdminNotice()
+    private function addWordpressAdminNotice(): void
     {
-        add_action('admin_enqueue_scripts', function ($hook) {
-            if ('post.php' !== $hook) {
+        add_action('admin_enqueue_scripts', function ($hook): void {
+            if ($hook !== 'post.php') {
                 return;
             }
             wp_register_script( 'routes_validator_admin', get_bloginfo('template_directory') . '/Router/assets/js/adminNotice.js' );
             wp_enqueue_script( 'routes_validator_admin' );
-            wp_localize_script( 'routes_validator_admin', 'my_routes_errors', ['error_message' => base64_encode(utf8_decode($this->createErrorMessage()))] );
+            wp_localize_script( 'routes_validator_admin', 'my_routes_errors', ['error_message' => base64_encode(mb_convert_encoding($this->createErrorMessage(), 'ISO-8859-1', 'UTF-8'))] );
         });
     }
 
     /**
      * Adds error notice in wordpress front website if routes conflicts
      */
-    private function addWordpressFrontNotice()
+    private function addWordpressFrontNotice(): void
     {
         wp_enqueue_style('notice_alert', get_bloginfo('template_directory') . '/Router/assets/css/notice.css');
-        add_action('wp_enqueue_scripts', function ($hook) {
+        add_action('wp_enqueue_scripts', function (): void {
             wp_register_script( 'routes_validator_front', get_bloginfo('template_directory') . '/Router/assets/js/frontNotice.js' );
             wp_enqueue_script( 'routes_validator_front' );
-            wp_localize_script( 'routes_validator_front', 'my_routes_errors', ['error_message' => base64_encode(utf8_decode($this->createErrorMessage()))] );
+            wp_localize_script( 'routes_validator_front', 'my_routes_errors', ['error_message' => base64_encode(mb_convert_encoding($this->createErrorMessage(), 'ISO-8859-1', 'UTF-8'))] );
         });
     }
 
@@ -235,7 +235,7 @@ class RoutesCollector
 
 
 
-    private function addError($post, \ReflectionMethod $method)
+    private function addError($post, \ReflectionMethod $method): void
     {
         $message        = '%s a la même url que la méthode "::%s" de la classe "%s"';
         $this->errors[] = sprintf($message, $post, $method->getName(), $method->getDeclaringClass()->getName());
@@ -318,7 +318,7 @@ class RoutesCollector
     {
         $arguments = [];
         foreach ($method->getParameters() as $parameter) {
-            $arguments[$parameter->getName()] = ($parameter->isOptional()) ? $parameter->getDefaultValue() : null;
+            $arguments[$parameter->getName()] = $parameter->isOptional() ? $parameter->getDefaultValue() : null;
         }
         return $arguments;
     }
@@ -329,12 +329,12 @@ class RoutesCollector
      */
     private function hasValidRoute(\ReflectionMethod $method): bool
     {
-        return null !== $this->reader->getMethodAnnotation($method, self::ROUTE_CLASS);
+        return $this->reader->getMethodAnnotation($method, self::ROUTE_CLASS) !== null;
     }
 
     /**
      * @param \ReflectionMethod $method
-     * @return mixed|object|null
+     * @return SiteRoute|null
      */
     private function getRoute(\ReflectionMethod $method): ?SiteRoute
     {

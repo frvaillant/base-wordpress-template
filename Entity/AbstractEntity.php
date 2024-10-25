@@ -1,35 +1,33 @@
 <?php
 
-
 namespace App\Entity;
-
 
 abstract class AbstractEntity
 {
     /**
      * @var string
      */
-    public $title;
+    protected $title;
 
     /**
      * @var string
      */
-    public $content;
+    protected $content;
 
     /**
      * @var bool|\WP_User
      */
-    public $post_author;
+    protected $post_author;
 
     /**
      * @var bool|\WP_User
      */
-    public $author;
+    protected $author;
 
     /**
      * @var array
      */
-    public $fields = [];
+    protected $fields = [];
 
     /**
      * @param string|int $id
@@ -77,9 +75,8 @@ abstract class AbstractEntity
 
     /**
      * @param string $name
-     * @return mixed
      */
-    public function __get(string $name): mixed
+    public function __get(string $name)
     {
         return $this->fields[$name] ?? null;
     }

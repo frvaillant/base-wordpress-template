@@ -2,7 +2,7 @@
 
 namespace App\Base\Router\DependencyInjection;
 
-class ParamConverter
+final class ParamConverter
 {
     /**
      * @var callable
@@ -25,7 +25,7 @@ class ParamConverter
         $method = $class->getMethod($this->controller[1]);
         $methodParameters = $method->getParameters();
 
-        /** @var \ReflectionParameter $param */
+        /** @var \ReflectionParameter $methodParameter */
         foreach ($methodParameters as $index => $methodParameter) {
             $this->injectEntity($methodParameter, $index, $arguments);
             $this->injectService($methodParameter, $index, $arguments);
@@ -58,7 +58,7 @@ class ParamConverter
      */
     private function injectService($methodParameter, $index, &$arguments): void
     {
-        if(!array_key_exists($index, $arguments) || null === $arguments[$index]) {
+        if(!array_key_exists($index, $arguments) || $arguments[$index] === null) {
             $serviceFqcn = $methodParameter->getType()->getName();
             $arguments[$index] = new $serviceFqcn();
         }

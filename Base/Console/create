@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+require_once ( __DIR__ . '/AbstractCreator.php');
 require_once ( __DIR__ . '/EntityCreator/EntityCreate.php');
 require_once ( __DIR__ . '/TemplateCreator/TemplateCreate.php');
 require_once ( __DIR__ . '/Colors.php');
@@ -58,7 +59,7 @@ if ($action) {
  * @param $error
  * @return string
  */
-function error($error)
+function error($error): string
 {
     if(!$error || $error === '') {
         $error = 'Nous n\'avons pas réussi à déterminer la source de l\'erreur';
@@ -74,7 +75,7 @@ function error($error)
  * @param $message
  * @return string
  */
-function success($message)
+function success($message): string
 {
     $colors = new Colors();
     return $colors->getColoredString(
@@ -83,11 +84,10 @@ function success($message)
     );
 }
 
-
 /**
  * @return string
  */
-function nothing()
+function nothing(): string
 {
     $colors = new Colors();
     return $colors->getColoredString(
@@ -100,7 +100,8 @@ function nothing()
  * @param $message
  * @return string
  */
-function message($message) {
+function message($message): string
+{
     $colors = new Colors();
     return $colors->getColoredString($message, 'green');
 }
@@ -109,7 +110,8 @@ function message($message) {
  * @param $routeName
  * @return bool
  */
-function routeExists($routeName) {
+function routeExists($routeName): bool
+{
     $file = __DIR__ . '/../routes.php';
     return count(explode('^' . $routeName, file_get_contents($file))) > 1;
 }

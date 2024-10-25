@@ -3,7 +3,7 @@ namespace App\Base\Router\Controller;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class DebugController extends AbstractController
+final class DebugController extends AbstractController
 {
 
     public function index()

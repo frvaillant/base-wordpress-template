@@ -5,9 +5,9 @@ namespace App\Model;
 use App\Model\AbstractRepository;
 use App\Model\EntityProvider;
 
-class EntityNameRepository  extends AbstractRepository
+final class EntityNameRepository  extends AbstractRepository
 {
-    const CLASSNAME = 'App\Entity\EntityName';
+    public const CLASSNAME = 'App\Entity\EntityName';
 
 
     public function __construct()
@@ -27,3 +27,4 @@ class EntityNameRepository  extends AbstractRepository
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }
 }
+*/

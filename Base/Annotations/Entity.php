@@ -11,26 +11,26 @@ use Doctrine\Common\Annotations\Annotation;
 /**
  * @Annotation
  */
-class Entity
+final class Entity
 {
 
     /**
-     * @var string|mixed
+     * @var string
      */
     private string $name;
 
     /**
-     * @var string|mixed
+     * @var string
      */
     private string $singular;
 
     /**
-     * @var string|mixed
+     * @var string
      */
     private string $plural;
 
     /**
-     * @var array|mixed|string[]
+     * @var array
      */
     private array $supports = [
         'title',
@@ -108,27 +108,11 @@ class Entity
     }
 
     /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
      * @return string
      */
     public function getSingular(): string
     {
         return $this->singular;
-    }
-
-    /**
-     * @param string $singular
-     */
-    public function setSingular(string $singular): void
-    {
-        $this->singular = $singular;
     }
 
     /**
@@ -140,27 +124,11 @@ class Entity
     }
 
     /**
-     * @param string $plural
-     */
-    public function setPlural(string $plural): void
-    {
-        $this->plural = $plural;
-    }
-
-    /**
      * @return array
      */
     public function getSupports(): array
     {
         return $this->supports;
-    }
-
-    /**
-     * @param array $supports
-     */
-    public function setSupports(array $supports): void
-    {
-        $this->supports = $supports;
     }
 
     /**
@@ -170,14 +138,4 @@ class Entity
     {
         return $this->exclude;
     }
-
-    /**
-     * @param array $exclude
-     */
-    public function setExclude(array $exclude): void
-    {
-        $this->exclude = $exclude;
-    }
-
-
 }

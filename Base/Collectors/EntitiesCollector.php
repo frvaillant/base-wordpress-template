@@ -14,7 +14,7 @@ use Symfony\Component\Finder\Finder;
 /**
  *
  */
-class EntitiesCollector
+final class EntitiesCollector
 {
     /**
      * @var array
@@ -58,7 +58,7 @@ class EntitiesCollector
      * @return void
      * @throws \ReflectionException
      */
-    private function collect()
+    private function collect(): void
     {
         $finder = new Finder();
 

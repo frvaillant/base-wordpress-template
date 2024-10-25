@@ -6,7 +6,7 @@ namespace App\Controller;
 use App\Controller\AbstractController;
 use App\Base\Annotations\Template;
 
-class ControllerNameController extends AbstractController
+final class ControllerNameController extends AbstractController
 {
 
     public function __construct()
@@ -22,3 +22,4 @@ class ControllerNameController extends AbstractController
         );
     }
 }
+*/

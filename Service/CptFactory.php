@@ -7,7 +7,7 @@ use App\Base\Annotations\Entity;
 /**
  * This class creates elements to define a new custom post as an entity
  */
-class CptFactory
+final class CptFactory
 {
 
     /**
@@ -27,13 +27,10 @@ class CptFactory
      */
     private string $plural;
     /**
-     * @var array|string[]
+     * @var array
      */
     private array $supports;
 
-    /**
-     * @param Entity $entity
-     */
     public function __construct(Entity $entity)
     {
         $this->entity = $entity;

@@ -12,11 +12,8 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\DocParser;
 use Symfony\Component\Finder\Finder;
 
-class TemplatesCollector
+final class TemplatesCollector
 {
-    /**
-     * @var string[]
-     */
     private array $excludedFolders;
     private array $templates;
     private string $folder;
@@ -42,7 +39,10 @@ class TemplatesCollector
         return $this->templates;
     }
 
-    private function collect()
+    /**
+     * @throws \ReflectionException
+     */
+    private function collect(): void
     {
         $finder = new Finder();
 
@@ -65,8 +65,8 @@ class TemplatesCollector
             foreach ($class->getMethods() as $method) {
                 $templateInformations = $this->reader->getMethodAnnotation($method, Template::class);
                 if($templateInformations) {
-                    $templateInformations->setController($class->getName());
-                    $templateInformations->setMethod($method->getName());
+                    $templateInformations->defineController($class->getName());
+                    $templateInformations->defineControllerMethod($method->getName());
                     $this->templates[] = $templateInformations;
                 }
             }

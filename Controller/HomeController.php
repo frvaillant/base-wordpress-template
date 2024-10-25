@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class HomeController extends AbstractController
+final class HomeController extends AbstractController
 {
 
     public function __construct()
@@ -21,8 +21,7 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         return $this->render('index.html.twig', [
-                'acf_is_installed' => function_exists('acf_is_plugin_active') && acf_is_plugin_active()
-            ]);
+            'acf_is_installed' => function_exists('acf_is_plugin_active') && acf_is_plugin_active()
+        ]);
     }
-
 }

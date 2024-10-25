@@ -28,7 +28,7 @@ abstract class AbstractController
 
     public function __construct()
     {
-        global $twig;
+        $twig = $GLOBALS['twig'];
         $this->twig = $twig;
         $this->response = new Response();
     }

@@ -1,12 +1,11 @@
 <?php
 namespace App\Model;
-use App\Model\EntityProvider;
 
-class PageRepository extends AbstractRepository
+final class PageRepository extends AbstractRepository
 {
-    const CLASSNAME = 'App\Entity\Page';
+    public const CLASSNAME = 'App\Entity\Page';
 
-    private $limit;
+    private int $limit;
 
     public function __construct()
     {

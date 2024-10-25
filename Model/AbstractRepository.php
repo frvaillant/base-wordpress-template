@@ -3,8 +3,6 @@
 
 namespace App\Model;
 
-use App\Model\EntityProvider;
-
 abstract class AbstractRepository
 {
 
@@ -16,7 +14,7 @@ abstract class AbstractRepository
 
     public function __construct()
     {
-        global $wpdb;
+        $wpdb = $GLOBALS['wpdb'];
         $this->wpdb = $wpdb;
 
         $this->provider = new EntityProvider();

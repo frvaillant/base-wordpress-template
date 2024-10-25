@@ -5,10 +5,8 @@ use App\Base\Collectors\EntitiesCollector;
 use App\Service\CptFactory;
 
 /**
- * Entités complémentaires
- * @param $entityName
- * @param $singular
- * @param $plurial
+ * @param Entity $entity
+ * @return void
  */
 function create_custom_post_type(Entity $entity): void
 {
@@ -16,9 +14,7 @@ function create_custom_post_type(Entity $entity): void
     register_post_type( $entity->getName(), $cptFactory->createCustomPostArguments());
 }
 
-/**
- * @return void
- */
+
 function entities(): void
 {
     $entityCollector = new EntitiesCollector();

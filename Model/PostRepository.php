@@ -1,12 +1,11 @@
 <?php
 namespace App\Model;
-use App\Model\EntityProvider;
 
-class PostRepository extends AbstractRepository
+final class PostRepository extends AbstractRepository
 {
-    const CLASSNAME = 'App\Entity\Post';
+    public const CLASSNAME = 'App\Entity\Post';
 
-    private $limit;
+    private int $limit;
 
     public function __construct()
     {
@@ -15,7 +14,10 @@ class PostRepository extends AbstractRepository
         $this->limit = $this->getPostLimit();
     }
 
-    public function getLastPost()
+    /**
+     * @return array
+     */
+    public function getLastPost(): array
     {
         $args = [
             'post_type'         => 'post',
@@ -27,7 +29,11 @@ class PostRepository extends AbstractRepository
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }
 
-    public function getAllPosts($paged = 1)
+    /**
+     * @param $paged
+     * @return array
+     */
+    public function getAllPosts(int $paged = 1): array
     {
         $args = [
             'post_type'         => 'post',
@@ -40,7 +46,10 @@ class PostRepository extends AbstractRepository
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }
 
-    public function countPosts()
+    /**
+     * @return int|null
+     */
+    public function countPosts(): ?int
     {
         $args = [
             'post_type'         => 'post',

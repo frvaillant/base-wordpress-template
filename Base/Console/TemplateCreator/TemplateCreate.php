@@ -1,31 +1,32 @@
 <?php
-require_once ( __DIR__ . '/../AbstractCreator.php');
+namespace App\Base\Console\TemplateCreator;
 
+use App\Base\Console\AbstractCreator;
 
-class TemplateCreate extends AbstractCreator
+final class TemplateCreate extends AbstractCreator
 {
     /**
      * @var string
      */
     private $templateName;
     /**
-     * @var mixed
+     * @var string
      */
     private $frenchName;
 
     /**
      *
      */
-    const CONTROLLER_FOLDER = __DIR__ . '/../../../Controller';
+    public const CONTROLLER_FOLDER = __DIR__ . '/../../../Controller';
     /**
      *
      */
-    const VIEW_FOLDER = __DIR__ . '/../../../View';
+    public const VIEW_FOLDER = __DIR__ . '/../../../View';
 
     /**
      *
      */
-    const ANNOTATION = '
+    public const ANNOTATION = '
 /**
 * @Template(identifier="%s", name="%s")
 **/
@@ -66,12 +67,12 @@ class TemplateCreate extends AbstractCreator
      * @return void
      * @throws Exception
      */
-    private function createController()
+    private function createController(): void
     {
         $source = file_get_contents(__DIR__ . '/Files/controller.php');
         if($source) {
             $source = str_replace('ControllerName', $this->templateName, $source);
-            $source = str_replace('/*', '', $source);
+            $source = str_replace(['/*', '*/'], ['', ''], $source);
             $annotation = sprintf(self::ANNOTATION, $this->slug, $this->frenchName);
             $source = str_replace('public function index', $annotation . 'public function index', $source);
             file_put_contents(self::CONTROLLER_FOLDER . '/' . ucfirst($this->templateName) . 'Controller.php', $source);

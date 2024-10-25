@@ -4,7 +4,7 @@ namespace App\Base\Router\Traits;
 trait PlurialTrait
 {
 
-    function plurial(array $array, string $plurial = 's', string $singular = '')
+    public function plurial(array $array, string $plurial = 's', string $singular = '')
     {
         return count($array) > 1 ? $plurial : $singular;
     }

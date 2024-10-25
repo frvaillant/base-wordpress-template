@@ -11,7 +11,7 @@ use Twig\Error\SyntaxError;
 /**
  *
  */
-class PageController extends AbstractController
+final class PageController extends AbstractController
 {
 
     public function __construct()
@@ -29,9 +29,7 @@ class PageController extends AbstractController
         $page = get_post(get_the_id());
         $page = new Page($page->ID);
         return $this->render('Page/index.html.twig', [
-                'page' => $page
-            ]);
-
+            'page' => $page
+        ]);
     }
-
 }

@@ -18,80 +18,80 @@ $twig->addExtension(new \Twig\Extra\CssInliner\CssInlinerExtension());
 
 
 $twig->addFunction(
-    new \Twig\TwigFunction('page_link', function ($param) {
+    new \Twig\TwigFunction('page_link', static function ($param) {
         return get_page_link($param);
     })
 );
 
 
 $twig->addFunction(
-    new \Twig\TwigFunction('get_search_form', function () {
+    new \Twig\TwigFunction('get_search_form', static function () {
         return get_search_form();
     })
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('is_user_logged_in', function () {
+    new \Twig\TwigFunction('is_user_logged_in', static function () {
         return is_user_logged_in();
     })
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('stripslashes', function ($data) {
+    new \Twig\TwigFunction('stripslashes', static function ($data) {
         return stripslashes($data);
     })
 );
 
 
 $twig->addFunction(
-    new \Twig\TwigFunction('get_page_by_title', function ($title) {
+    new \Twig\TwigFunction('get_page_by_title', static function ($title) {
         return get_page_by_title($title);
     })
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('bloginfo', function ($param) {
+    new \Twig\TwigFunction('bloginfo', static function ($param) {
         return get_bloginfo($param);
     })
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('get_permalink', function () {
+    new \Twig\TwigFunction('get_permalink', static function () {
         return 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
     })
 );
 
 
-$twig->addFunction(new \Twig\TwigFunction('asset', function ($asset) {
+$twig->addFunction(new \Twig\TwigFunction('asset', static function ($asset) {
     return sprintf(get_bloginfo('template_directory') . '/public/build/%s', ltrim($asset, '/'));
 }));
 
 $twig->addFunction(
-    new \Twig\TwigFunction('footer', function () {
+    new \Twig\TwigFunction('footer', static function () {
         return wp_footer();
     })
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('wp_footer', function () {
+    new \Twig\TwigFunction('wp_footer', static function () {
         return wp_footer();
     })
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('header', function () {
+    new \Twig\TwigFunction('header', static function () {
         return wp_head();
     })
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('wp_head', function () {
+    new \Twig\TwigFunction('wp_head', static function () {
         return wp_head();
     })
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('get_the_post_thumbnail_url', function($postId) {
+    new \Twig\TwigFunction('get_the_post_thumbnail_url', static function($postId) {
         return get_the_post_thumbnail_url($postId);
     })
 );
