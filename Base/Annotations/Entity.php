@@ -47,6 +47,8 @@ class Entity
         'menu_order',
         'sticky',
     ];
+
+    private array $exclude = [];
     /**
      * @throws \Exception
      */
@@ -60,7 +62,26 @@ class Entity
             $this->supports =  $params['supports'];
         }
 
+        if(isset($params['exclude'])) {
+            $this->exclude =  $params['exclude'];
+        }
+
+        $this->removeExcludedSupports();
+
         $this->secure();
+    }
+
+    /**
+     * @return void
+     */
+    public function removeExcludedSupports(): void
+    {
+        foreach ($this->exclude as $excluded) {
+            $key = array_search($excluded, $this->supports);
+            if($key) {
+                unset($this->supports[$key]);
+            }
+        }
     }
 
     /**
@@ -141,4 +162,22 @@ class Entity
     {
         $this->supports = $supports;
     }
+
+    /**
+     * @return array
+     */
+    public function getExclude(): array
+    {
+        return $this->exclude;
+    }
+
+    /**
+     * @param array $exclude
+     */
+    public function setExclude(array $exclude): void
+    {
+        $this->exclude = $exclude;
+    }
+
+
 }
