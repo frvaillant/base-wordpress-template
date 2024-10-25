@@ -3,22 +3,22 @@
 Ce repository propose des bases pour développer un thème WordPress presque comme si tu étais dans le framework Symfony.
 
 ## Installation
-Rends-toi dans le dossier "themes" de ton installation WordPress et clone ce repo :
+Rends-toi dans le dossier "themes" de ton installation WordPress et clone ce repo :  
 `cd wp-content/themes`  
 `git clone https://github.com/frvaillant/base-wordpress-template your-desired-theme-folder-name`
 
-Ensuite, rends-toi dans le dossier créé et exécute les commandes suivantes :
+Ensuite, rends-toi dans le dossier créé et exécute les commandes suivantes :  
 `cd your-desired-theme-folder-name`  
 `git remote remove origin`  
 Optionnel : `git remote add origin https://your-origin-repository.com`  
 `composer install`  
 `yarn install`  
-`yarn encore dev`
+`yarn encore dev`  
 
-Démarre ton serveur PHP à la racine de ton site :
-`php -S localhost:9999` (choisis le port qui te plaît)
+Démarre ton serveur PHP à la racine de ton site :  
+`php -S localhost:9999` (choisis le port qui te plaît)  
 
-Termine la configuration de ton WordPress si besoin.
+Termine la configuration de ton WordPress si besoin.  
 
 Dans le back-office, rends-toi dans Apparence -> Thèmes et active "Hope you'll enjoy".
 
@@ -36,20 +36,29 @@ On va prendre l'exemple d'un catalogue de formations. Pour cela, on aura besoin 
 Crée une première page depuis ton back-office et appelle-la "Catalogue des formations".
 
 ### Créer un template pour tes pages
-Dans ton terminal, rends-toi dans le dossier du thème et lance la commande :
-`php console/create`  
+Dans ton terminal, rends-toi dans le dossier du thème et lance la commande :  
+`./create`  
 Cela te demandera ce que tu veux créer. Tape "template".  
 Donne-lui un nom comme "catalog", puis un nom compréhensible comme "Catalogue des formations".
 
 Un nouveau contrôleur a été créé dans le namespace App\Controller : `App\Controller\CatalogController`.  
-La méthode `index` de ce contrôleur devrait avoir une annotation "@Template...".  
+La méthode `index` de ce contrôleur devrait avoir une annotation "@Template..." qui ressemble à ça :  
+```PHP
+/**
+* @Template(identifier="catalog", name="Catalogue des formations")
+**/
+```
 Dans ton back-office, tu devrais pouvoir assigner ce template "Catalogue des formations" à ta page.
 
-Une vue Twig a également été créée pour gérer l'affichage de cette page dans View\Catalog\index.html.twig.
+Une vue Twig a également été créée pour gérer l'affichage de cette page dans View\Catalog\index.html.twig.  
+
+Tu pourrais ensuite facilement ajouter une méthode dans ton controller avec une autre annotation `@Template...` 
+et ainsi disposer d'un autre modèle pour d'autres pages liées aux formations.  
+
 
 ### Créer une entité (custom post)
 Dans ton terminal, rends-toi dans le dossier du thème et lance la commande :
-`php console/create`  
+`./create`  
 Cela te demandera ce que tu veux créer. Cette fois, tape "entity".  
 Donne un nom pour la classe, comme "Formation", un nom pour le back-office au singulier "Formation", puis son nom au pluriel "Formations".  
 Tu disposes maintenant d'une entité sous forme d'un custom post disponible dans ton back-office.
