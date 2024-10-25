@@ -59,6 +59,10 @@ Dans le dossier Entity, tu as maintenant une classe Formation.php avec une annot
 Par défaut, ce custom post supporte tout ce qui est possible côté WordPress. Mais tu peux restreindre ces options en complétant l'annotation :  
 Par exemple, `@Entity(name="Formation", singular="Formation", plural="Formations", supports={"editor", "thumbnail"})`.
 
+Tu peux aussi si tu préfères, exclure les "supports" dont tu n'as pas besoin en utilisant exclude={} dans l'annotation.  
+Par exemple, si tu ne souhaites pas utiliser l'éditeur de contenu, ni l'image mise en avant pour cette entité :  
+`@Entity(name="Formation", singular="Formation", plural="Formations", exclude={"editor", "thumbnail"})`
+
 Tu peux utiliser le plugin ACF ou SCF pour ajouter des champs complémentaires à cette entité.  
 Ces champs complémentaires seront automatiquement disponibles dans ton entité en tant que propriété publique.
 Tu pourras donc les appeler comme ceci :  
