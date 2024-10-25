@@ -59,7 +59,14 @@ Dans le dossier Entity, tu as maintenant une classe Formation.php avec une annot
 Par défaut, ce custom post supporte tout ce qui est possible côté WordPress. Mais tu peux restreindre ces options en complétant l'annotation :  
 Par exemple, `@Entity(name="Formation", singular="Formation", plural="Formations", supports={"editor", "thumbnail"})`.
 
-Tu peux utiliser le plugin ACF ou SCF pour ajouter des champs complémentaires à cette entité.
+Tu peux utiliser le plugin ACF ou SCF pour ajouter des champs complémentaires à cette entité.  
+Ces champs complémentaires seront automatiquement disponibles dans ton entité en tant que propriété publique.
+Tu pourras donc les appeler comme ceci :  
+```PHP
+    $formation = new Formation($id);
+    // Si tu as nommé ton custom field  "champ_complementaire"
+    $champComplementaire = $formation->champ_complementaire;
+```
 
 Pour utiliser cette entité dans ton code :
 ```PHP

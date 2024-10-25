@@ -1,7 +1,7 @@
 <?php
 
-use App\Annotations\Entity;
-use App\Collectors\EntitiesCollector;
+use App\Base\Annotations\Entity;
+use App\Base\Collectors\EntitiesCollector;
 use App\Service\CptFactory;
 
 /**

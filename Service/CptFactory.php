@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Annotations\Entity;
+use App\Base\Annotations\Entity;
 
 /**
  * This class creates elements to define a new custom post as an entity

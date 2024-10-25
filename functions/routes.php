@@ -2,7 +2,7 @@
 
 namespace App\functions;
 
-use App\Router\Router;
+use App\Base\Router\Router;
 
 $_ROUTER = new Router();
 add_action( 'init', function () {

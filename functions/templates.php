@@ -1,11 +1,12 @@
 <?php
-use App\Router\DependencyInjection\DependencyInjector;
-use App\Collectors\TemplatesCollector;
+
+use App\Base\Collectors\TemplatesCollector;
+use App\Base\Router\DependencyInjection\DependencyInjector;
 
 $templatesCollector = new TemplatesCollector();
 $theme_templates = $templatesCollector->getTemplates();
 
-/** @var \App\Annotations\Template $templateInformations */
+/** @var \App\Base\Annotations\Template $templateInformations */
 foreach ($theme_templates as $templateInformations) {
 
     /**
