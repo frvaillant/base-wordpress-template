@@ -2,7 +2,7 @@
 
 use App\Base\Annotations\Entity;
 use App\Base\Collectors\EntitiesCollector;
-use App\Service\CustomPostFactory;
+use App\Base\Service\CustomPostFactory;
 
 /**
  * @param Entity $entity

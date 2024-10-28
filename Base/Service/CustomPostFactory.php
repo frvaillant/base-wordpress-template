@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Base\Service;
 
 use App\Base\Annotations\Entity;
 
