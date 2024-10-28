@@ -104,7 +104,7 @@ final class TemplateCreate extends BaseCreator
         $source = file_get_contents(__DIR__ . '/Files/controller.php');
         if($source) {
             $source = str_replace('ControllerName', $this->templateName, $source);
-            $source = str_replace('%identifier%', $this->slug, $source);
+            $source = str_replace('%identifier%', $this->makeIdentifier($this->slug), $source);
             $source = str_replace('%name%', $this->frenchName, $source);
 
             $controllerName = ucfirst($this->templateName) . 'Controller.php';
@@ -118,6 +118,17 @@ final class TemplateCreate extends BaseCreator
             return;
         }
         throw new \Exception('Source file is not found');
+    }
+
+    private function makeIdentifier(string $identifier): string
+    {
+        return preg_replace_callback(
+            '/[A-Z]/',
+            function($matches) {
+                return '_' . strtolower($matches[0]);
+            },
+            $identifier
+        );
     }
 
     /**

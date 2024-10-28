@@ -22,14 +22,14 @@ if($choice !== '0' && $choice !== '1') {
 $action = $choice === '0' ? 'entity' : 'template';
 
 if($action === 'entity') {
-    $entityName = readline('Give it a CamelCaseName (Post, Article ...) :');
-    $singular = readline('Give it a name in your language for singular display (Article, Recipe ...) :');
-    $plural = readline('Give it a name in your language for plural display  (Articles, Recipes ...) :');
+    $entityName = trim(readline('Give it a CamelCaseName (Post, Article ...) :'));
+    $singular = trim(readline('Give it a name in your language for singular display (Article, Recipe ...) :'));
+    $plural = trim(readline('Give it a name in your language for plural display  (Articles, Recipes ...) :'));
 }
 
 if($action === 'template') {
-    $slug = readline('slug name (Example : recipesBook) :');
-    $templateName = readline('Its name in your language (Example : All my recipes ...) :');
+    $slug = trim(readline('slug name (Example : recipesBook) :'));
+    $templateName = trim(readline('Its name in your language (Example : All my recipes ...) :'));
 }
 
 if ($action) {
