@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-final class HomeController extends AbstractController
+final class HomeController extends BaseController
 {
 
     public function __construct()

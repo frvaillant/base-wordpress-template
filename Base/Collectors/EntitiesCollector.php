@@ -94,5 +94,4 @@ final class EntitiesCollector
         $className     = $namespace . '\\' . $fileName;
         return new \ReflectionClass($className);
     }
-
 }

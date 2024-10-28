@@ -1,7 +1,6 @@
 <?php
 namespace App\Model;
-
-final class PageRepository extends AbstractRepository
+final class PageRepository extends BaseRepository
 {
     public const CLASSNAME = 'App\Entity\Page';
 
@@ -26,6 +25,5 @@ final class PageRepository extends AbstractRepository
         ];
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }
-
 
 }

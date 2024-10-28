@@ -10,7 +10,7 @@ final class EntityProvider
      * @param $className
      * @return array
      */
-    public function provide($queryResults, $className): array
+    public function provide(array $queryResults, string $className): array
     {
         $results = [];
         foreach ($queryResults as $result) {

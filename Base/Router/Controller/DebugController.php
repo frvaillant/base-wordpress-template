@@ -1,9 +1,9 @@
 <?php
 namespace App\Base\Router\Controller;
-use App\Controller\AbstractController;
+use App\Controller\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-final class DebugController extends AbstractController
+final class DebugController extends BaseController
 {
 
     public function index()
@@ -22,5 +22,4 @@ final class DebugController extends AbstractController
         $response->setData($data);
         return $response->send();
     }
-
 }

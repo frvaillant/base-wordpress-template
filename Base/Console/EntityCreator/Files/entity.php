@@ -3,9 +3,8 @@
 namespace App\Entity;
 
 use App\Base\Annotations\Entity;
-use App\Entity\AbstractEntity;
 
-final class EntityName extends AbstractEntity
+final class EntityName extends BaseEntity
 {
 
     public function __construct($postId)

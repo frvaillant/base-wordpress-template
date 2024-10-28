@@ -3,10 +3,9 @@
 /*
 namespace App\Controller;
 
-use App\Controller\AbstractController;
 use App\Base\Annotations\Template;
 
-final class ControllerNameController extends AbstractController
+final class ControllerNameController extends BaseController
 {
 
     public function __construct()

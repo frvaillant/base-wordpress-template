@@ -1,7 +1,7 @@
 <?php
 namespace App\Base\Console;
 
-abstract class AbstractCreator
+abstract class BaseCreator
 {
     protected bool $success;
     protected $error;

@@ -7,28 +7,13 @@ use App\Base\Annotations\Entity;
 /**
  * This class creates elements to define a new custom post as an entity
  */
-final class CptFactory
+final class CustomPostFactory
 {
 
-    /**
-     * @var Entity
-     */
     private Entity $entity;
-    /**
-     * @var string
-     */
     private string $entityName;
-    /**
-     * @var string
-     */
     private string $singular;
-    /**
-     * @var string
-     */
     private string $plural;
-    /**
-     * @var array
-     */
     private array $supports;
 
     public function __construct(Entity $entity)

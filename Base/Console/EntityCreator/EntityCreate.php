@@ -2,14 +2,19 @@
 
 namespace App\Base\Console\EntityCreator;
 
-use App\Base\Console\AbstractCreator;
+use App\Base\Console\BaseCreator;
 
-final class EntityCreate extends AbstractCreator
+final class EntityCreate extends BaseCreator
 {
-
     public const ENTITY_FOLDER = __DIR__ . '/../../../Entity';
 
     public const MODEL_FOLDER = __DIR__ . '/../../../Model';
+
+    public const ANNOTATION = '
+/**
+ * @Entity(name="%s", singular="%s", plural="%s")
+ */
+';
     /**
      * @var array
      */
@@ -18,12 +23,6 @@ final class EntityCreate extends AbstractCreator
      * @var string
      */
     private string $name;
-
-    public const ANNOTATION = '
-/**
- * @Entity(name="%s", singular="%s", plural="%s")
- */
-';
 
     /**
      * @param array $arguments
@@ -35,7 +34,6 @@ final class EntityCreate extends AbstractCreator
         $this->name = implode('', array_map(function($value) {
             return ucfirst($value);
         }, $names));
-
     }
 
 
@@ -47,7 +45,7 @@ final class EntityCreate extends AbstractCreator
     {
         $source = file_get_contents(__DIR__ . '/Files/entity.php');
         if ($source) {
-            $source = str_replace('/*', '', $source);
+            $source = str_replace(['/*', '*/'], ['', ''], $source);
             $source = str_replace('EntityName', ucfirst($this->name), $source);
             $annotation = sprintf(self::ANNOTATION, ucfirst($this->name), $this->arguments['singular'], $this->arguments['plurial']);
             $source = str_replace('class', $annotation . 'class', $source);
@@ -65,7 +63,7 @@ final class EntityCreate extends AbstractCreator
     {
         $source = file_get_contents(__DIR__ . '/Files/repository.php');
         if ($source) {
-            $source = str_replace('/*', '', $source);
+            $source = str_replace(['/*', '*/'], ['', ''], $source);
             $source = str_replace('EntityName', ucfirst($this->name), $source);
             $source = str_replace('entitynamelower', strtolower($this->name), $source);
             file_put_contents(self::MODEL_FOLDER . '/' . ucfirst($this->name) . 'Repository.php', $source);

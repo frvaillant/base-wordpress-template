@@ -11,6 +11,13 @@
         <p>
             {{ page.content | raw }} {# page.post_content works also / use  {{ do_shortcodes(page.content) | raw }} if tou use shortcodes #}
         </p>
+
+        <p>
+            {{ formation.title }}
+        </p>
+        <p>
+            {{ formation.author.data.nice_name }}
+        </p>
     </div>
 
 {% endblock %}

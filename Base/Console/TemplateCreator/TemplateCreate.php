@@ -1,9 +1,9 @@
 <?php
 namespace App\Base\Console\TemplateCreator;
 
-use App\Base\Console\AbstractCreator;
+use App\Base\Console\BaseCreator;
 
-final class TemplateCreate extends AbstractCreator
+final class TemplateCreate extends BaseCreator
 {
     /**
      * @var string
@@ -35,7 +35,7 @@ final class TemplateCreate extends AbstractCreator
     /**
      * @var string
      */
-    private $twigFolderName;
+    private string $twigFolderName;
     /**
      * @var string
      */
@@ -46,21 +46,48 @@ final class TemplateCreate extends AbstractCreator
      */
     public function __construct($arguments)
     {
-
         $names = explode(' ', $arguments['className']);
-        $this->templateName = implode('', array_map(function($value) {
-            return ucfirst($value);
-        }, $names));
 
-        $this->slug = implode('-', array_map(function($value) {
-            return $value;
-        }, $names));
+        $this->templateName = $this->makeTemplateName($names);
 
-        $this->twigFolderName = ucfirst(implode('_', array_map(function($value) {
-            return strtolower($value);
-        }, $names)));
+        $this->slug = $this->makeSlug($names);
+
+        $this->twigFolderName = $this->makeFolderName($names);
 
         $this->frenchName = $arguments['frenchName'];
+    }
+
+    /**
+     * @param array $names
+     * @return string
+     */
+    private function makeTemplateName(array $names): string
+    {
+        return implode('', array_map(function($value) {
+            return ucfirst($value);
+        }, $names));
+    }
+
+    /**
+     * @param array $names
+     * @return string
+     */
+    private function makeSlug(array $names): string
+    {
+        return implode('-', array_map(function($value) {
+            return $value;
+        }, $names));
+    }
+
+    /**
+     * @param array $names
+     * @return string
+     */
+    private function makeFolderName(array $names): string
+    {
+        return ucfirst(implode('_', array_map(function($value) {
+            return strtolower($value);
+        }, $names)));
     }
 
     /**

@@ -21,47 +21,56 @@ final class ParamConverter
      */
     public function convert(&$arguments): void
     {
+        $methodParameters = $this->getMethodParameters();
+
+        foreach ($methodParameters as $index => $methodParameter) {
+            $this->processParameter($methodParameter, $index, $arguments);
+        }
+    }
+
+    private function getMethodParameters(): array
+    {
         $class = new \ReflectionClass($this->controller[0]::class);
         $method = $class->getMethod($this->controller[1]);
-        $methodParameters = $method->getParameters();
+        return $method->getParameters();
+    }
 
-        /** @var \ReflectionParameter $methodParameter */
-        foreach ($methodParameters as $index => $methodParameter) {
+    /**
+     * @param \ReflectionParameter $methodParameter
+     * @param int $index
+     * @param array $arguments
+     * @return void
+     */
+    private function processParameter(\ReflectionParameter $methodParameter, int $index, &$arguments): void
+    {
+        if ($this->isEntityParameter($methodParameter, $index, $arguments)) {
             $this->injectEntity($methodParameter, $index, $arguments);
+        } elseif ($this->isServiceParameter($index, $arguments)) {
             $this->injectService($methodParameter, $index, $arguments);
         }
     }
 
-    /**
-     * @param $methodParameter
-     * @param $index
-     * @param $arguments
-     * @return void
-     */
+    private function isEntityParameter($methodParameter, $index, $arguments): bool
+    {
+        return $methodParameter->getType()
+            && isset($arguments[$index])
+            && str_contains($methodParameter->getType()->getName(), 'Entity');
+    }
+
+    private function isServiceParameter($index, $arguments): bool
+    {
+        return !array_key_exists($index, $arguments) || $arguments[$index] === null;
+    }
+
     private function injectEntity($methodParameter, $index, &$arguments): void
     {
-        if(
-            $methodParameter->getType()
-            && isset($arguments[$index])
-            && str_contains($methodParameter->getType()->getName(), 'Entity')
-        ) {
-            $entityFqcn = $methodParameter->getType()->getName();
-            $arguments[$index] = new $entityFqcn($arguments[$index]);
-        }
+        $entityFqcn = $methodParameter->getType()->getName();
+        $arguments[$index] = new $entityFqcn($arguments[$index]);
     }
 
-    /**
-     * @param $methodParameter
-     * @param $index
-     * @param $arguments
-     * @return void
-     */
     private function injectService($methodParameter, $index, &$arguments): void
     {
-        if(!array_key_exists($index, $arguments) || $arguments[$index] === null) {
-            $serviceFqcn = $methodParameter->getType()->getName();
-            $arguments[$index] = new $serviceFqcn();
-        }
+        $serviceFqcn = $methodParameter->getType()->getName();
+        $arguments[$index] = new $serviceFqcn();
     }
-
 }

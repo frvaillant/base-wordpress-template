@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-final class Page extends AbstractEntity
+final class Page extends BaseEntity
 {
     public function __construct($postId)
     {

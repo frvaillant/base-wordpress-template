@@ -2,7 +2,7 @@
 
 use App\Base\Annotations\Entity;
 use App\Base\Collectors\EntitiesCollector;
-use App\Service\CptFactory;
+use App\Service\CustomPostFactory;
 
 /**
  * @param Entity $entity
@@ -10,11 +10,13 @@ use App\Service\CptFactory;
  */
 function create_custom_post_type(Entity $entity): void
 {
-    $cptFactory = new CptFactory($entity);
+    $cptFactory = new CustomPostFactory($entity);
     register_post_type( $entity->getName(), $cptFactory->createCustomPostArguments());
 }
 
-
+/**
+ * @return void
+ */
 function entities(): void
 {
     $entityCollector = new EntitiesCollector();
@@ -24,5 +26,5 @@ function entities(): void
         create_custom_post_type($entity);
     }
 }
-add_action( 'init', 'entities', 0 );
 
+add_action( 'init', 'entities', 0 );

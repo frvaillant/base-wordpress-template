@@ -1,7 +1,10 @@
 #!/usr/bin/env php
 <?php
 
-require_once ( __DIR__ . '/AbstractCreator.php');
+use App\Base\Console\Colors;
+use App\Base\Console\EntityCreator\EntityCreate;
+
+require_once ( __DIR__ . '/BaseCreator.php');
 require_once ( __DIR__ . '/EntityCreator/EntityCreate.php');
 require_once ( __DIR__ . '/TemplateCreator/TemplateCreate.php');
 require_once ( __DIR__ . '/Colors.php');

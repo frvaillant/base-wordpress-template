@@ -2,10 +2,10 @@
 
 /*
 namespace App\Model;
-use App\Model\AbstractRepository;
+
 use App\Model\EntityProvider;
 
-final class EntityNameRepository  extends AbstractRepository
+final class EntityNameRepository  extends BaseRepository
 {
     public const CLASSNAME = 'App\Entity\EntityName';
 
@@ -15,7 +15,7 @@ final class EntityNameRepository  extends AbstractRepository
         parent::__construct();
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         $args = [
             'post_type'         => 'entitynamelower',

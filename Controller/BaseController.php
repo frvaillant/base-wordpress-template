@@ -10,7 +10,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-abstract class AbstractController
+abstract class BaseController
 {
     /**
      * @var \Twig\Environment
@@ -83,6 +83,5 @@ abstract class AbstractController
         $response = new JsonResponse($data, $code);
         return $response->send();
     }
-
 
 }

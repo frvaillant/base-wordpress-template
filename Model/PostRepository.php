@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 
-final class PostRepository extends AbstractRepository
+final class PostRepository extends BaseRepository
 {
     public const CLASSNAME = 'App\Entity\Post';
 
@@ -58,5 +58,4 @@ final class PostRepository extends AbstractRepository
         ];
         return count(get_posts($args));
     }
-
 }

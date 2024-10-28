@@ -177,5 +177,4 @@ final class Router
 
         call_user_func_array($controller, $arguments);
     }
-
 }

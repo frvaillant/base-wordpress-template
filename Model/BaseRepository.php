@@ -3,7 +3,7 @@
 
 namespace App\Model;
 
-abstract class AbstractRepository
+abstract class BaseRepository
 {
 
     protected $wpdb;

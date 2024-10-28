@@ -8,7 +8,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-final class PostController extends AbstractController
+final class PostController extends BaseController
 {
 
     public function __construct()
@@ -30,4 +30,3 @@ final class PostController extends AbstractController
         ]);
     }
 }
-
