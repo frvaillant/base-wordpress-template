@@ -11,6 +11,5 @@ final class EntityName extends BaseEntity
     {
         parent::__construct($postId);
     }
-
 }
 */

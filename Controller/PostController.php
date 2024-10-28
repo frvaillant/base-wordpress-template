@@ -10,7 +10,6 @@ use Twig\Error\SyntaxError;
 
 final class PostController extends BaseController
 {
-
     public function __construct()
     {
         parent::__construct();

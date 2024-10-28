@@ -53,6 +53,7 @@ abstract class BaseEntity
     /**
      * @param string $name
      * @param array $arguments
+     *
      * @return mixed|null
      *
      * Allows twig accessing properties doing {{ entity.property }}
@@ -65,6 +66,7 @@ abstract class BaseEntity
 
     /**
      * @param string $name
+     *
      * @return mixed|null
      *
      * Allow PHP code accessing properties doing $entity->propertyName

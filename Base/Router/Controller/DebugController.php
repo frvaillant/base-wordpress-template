@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class DebugController extends BaseController
 {
-
     public function index()
     {
         $_ROUTER = $GLOBALS['_ROUTER'];

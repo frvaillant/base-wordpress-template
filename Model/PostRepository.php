@@ -32,6 +32,7 @@ final class PostRepository extends BaseRepository
 
     /**
      * @param $paged
+     *
      * @return array
      */
     public function getAllPosts(int $paged = 1): array

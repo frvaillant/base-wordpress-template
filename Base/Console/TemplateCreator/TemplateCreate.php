@@ -60,6 +60,7 @@ final class TemplateCreate extends BaseCreator
 
     /**
      * @param array $names
+     *
      * @return string
      */
     private function makeTemplateName(array $names): string
@@ -71,6 +72,7 @@ final class TemplateCreate extends BaseCreator
 
     /**
      * @param array $names
+     *
      * @return string
      */
     private function makeSlug(array $names): string
@@ -82,6 +84,7 @@ final class TemplateCreate extends BaseCreator
 
     /**
      * @param array $names
+     *
      * @return string
      */
     private function makeFolderName(array $names): string
@@ -93,6 +96,7 @@ final class TemplateCreate extends BaseCreator
 
     /**
      * @return void
+     *
      * @throws Exception
      */
     private function createController(): void
@@ -112,6 +116,7 @@ final class TemplateCreate extends BaseCreator
 
     /**
      * @return void
+     *
      * @throws Exception
      */
     private function createTwig(): void

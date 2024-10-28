@@ -59,6 +59,9 @@ final class Router
         $this->wordpressUrls = $this->routesCollector->getWordpressUrls();
     }
 
+    /**
+     * @return void
+     */
     private function addDebugRoute(): void
     {
         $this->addRoute('debug_router', new Route('/debug/router', [
@@ -109,6 +112,7 @@ final class Router
 
     /**
      * @return RouteCollection
+     *
      * @throws \ReflectionException
      */
     private function initRoutes(): void
@@ -117,6 +121,12 @@ final class Router
         $this->routesPaths = $this->routesCollector->getRoutesPaths();
     }
 
+    /**
+     * @param string $routeId
+     * @param Route $route
+     *
+     * @return void
+     */
     public function addRoute(string $routeId, Route $route): void
     {
         $this->routes->add($routeId, $route);
@@ -132,6 +142,9 @@ final class Router
         $this->matcher = new UrlMatcher($this->getRoutes(), $context);
     }
 
+    /**
+     * @return bool|array
+     */
     public function match(): bool|array
     {
         try {

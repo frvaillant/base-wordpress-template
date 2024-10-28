@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This annotation is made to be used on an Entity class
  * For example : @Entity(name="Video", singular="vidéo", plural="vidéos")
@@ -50,6 +51,7 @@ final class Entity
     ];
 
     private array $exclude = [];
+
     /**
      * @throws \Exception
      */
@@ -87,6 +89,7 @@ final class Entity
 
     /**
      * @return void
+     *
      * @throws \Exception
      */
     public function secure(): void

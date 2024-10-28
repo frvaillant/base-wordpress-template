@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class HomeController extends BaseController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -14,6 +13,7 @@ final class HomeController extends BaseController
 
     /**
      * @return string
+     *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError

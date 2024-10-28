@@ -20,6 +20,7 @@ abstract class BaseCreator
 
     /**
      * @param $path
+     *
      * @return bool
      */
     protected function createDir($path): bool

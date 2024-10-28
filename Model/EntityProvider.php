@@ -8,6 +8,7 @@ final class EntityProvider
     /**
      * @param $queryResults
      * @param $className
+     *
      * @return array
      */
     public function provide(array $queryResults, string $className): array

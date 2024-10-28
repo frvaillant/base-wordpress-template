@@ -16,7 +16,9 @@ final class ParamConverter
 
     /**
      * @param $arguments
+     *
      * @return void
+     *
      * @throws \ReflectionException
      */
     public function convert(&$arguments): void
@@ -28,6 +30,11 @@ final class ParamConverter
         }
     }
 
+    /**
+     * @return array
+     *
+     * @throws \ReflectionException
+     */
     private function getMethodParameters(): array
     {
         $class = new \ReflectionClass($this->controller[0]::class);
@@ -39,6 +46,7 @@ final class ParamConverter
      * @param \ReflectionParameter $methodParameter
      * @param int $index
      * @param array $arguments
+     *
      * @return void
      */
     private function processParameter(\ReflectionParameter $methodParameter, int $index, &$arguments): void
@@ -50,6 +58,13 @@ final class ParamConverter
         }
     }
 
+    /**
+     * @param $methodParameter
+     * @param $index
+     * @param $arguments
+     *
+     * @return bool
+     */
     private function isEntityParameter($methodParameter, $index, $arguments): bool
     {
         return $methodParameter->getType()
@@ -57,17 +72,37 @@ final class ParamConverter
             && str_contains($methodParameter->getType()->getName(), 'Entity');
     }
 
+    /**
+     * @param $index
+     * @param $arguments
+     *
+     * @return bool
+     */
     private function isServiceParameter($index, $arguments): bool
     {
         return !array_key_exists($index, $arguments) || $arguments[$index] === null;
     }
 
+    /**
+     * @param $methodParameter
+     * @param $index
+     * @param $arguments
+     *
+     * @return void
+     */
     private function injectEntity($methodParameter, $index, &$arguments): void
     {
         $entityFqcn = $methodParameter->getType()->getName();
         $arguments[$index] = new $entityFqcn($arguments[$index]);
     }
 
+    /**
+     * @param $methodParameter
+     * @param $index
+     * @param $arguments
+     *
+     * @return void
+     */
     private function injectService($methodParameter, $index, &$arguments): void
     {
         $serviceFqcn = $methodParameter->getType()->getName();

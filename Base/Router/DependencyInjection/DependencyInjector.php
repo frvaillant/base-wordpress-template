@@ -16,7 +16,9 @@ final class DependencyInjector
     /**
      * @param $templateInformations
      * @param $parameters -> by reference
+     *
      * @return void
+     *
      * @throws \ReflectionException
      */
     public function autoloadDependencies($templateInformations, &$parameters): void

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This collects all methods white have @Template annotation in the Controller classes
  */
@@ -68,6 +69,12 @@ final class TemplatesCollector
         }
     }
 
+    /**
+     * @param \ReflectionClass $class
+     * @param \ReflectionMethod $method
+     *
+     * @return void
+     */
     private function makeTemplateInformations(\ReflectionClass $class, \ReflectionMethod $method): void
     {
         $templateInformations = $this->reader->getMethodAnnotation($method, Template::class);
@@ -81,7 +88,9 @@ final class TemplatesCollector
     /**
      * @param $fileName
      * @param $namespace
+     *
      * @return \ReflectionClass
+     *
      * @throws \ReflectionException
      */
     private function getReflectionClass($fileName, $namespace): \ReflectionClass

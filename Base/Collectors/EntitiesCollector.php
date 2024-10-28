@@ -56,6 +56,7 @@ final class EntitiesCollector
 
     /**
      * @return void
+     *
      * @throws \ReflectionException
      */
     private function collect(): void
@@ -86,7 +87,9 @@ final class EntitiesCollector
     /**
      * @param $fileName
      * @param $namespace
+     *
      * @return \ReflectionClass
+     *
      * @throws \ReflectionException
      */
     private function getReflectionClass($fileName, $namespace): \ReflectionClass

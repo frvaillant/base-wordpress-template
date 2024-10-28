@@ -39,6 +39,7 @@ final class EntityCreate extends BaseCreator
 
     /**
      * @return void
+     *
      * @throws Exception
      */
     private function createEntityFile(): void
@@ -57,6 +58,7 @@ final class EntityCreate extends BaseCreator
 
     /**
      * @return void
+     *
      * @throws Exception
      */
     private function createRepository(): void

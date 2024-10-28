@@ -32,6 +32,11 @@ final class RoutesCollector
         $this->initializeComponents();
     }
 
+    /**
+     * @return void
+     *
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     */
     private function initializeComponents(): void
     {
         $this->folder = __DIR__ . '/../../';
@@ -40,6 +45,9 @@ final class RoutesCollector
         $this->reader = new DocReader($this->parser);
     }
 
+    /**
+     * @return RouteCollection
+     */
     public function getRoutes(): RouteCollection
     {
         $finder = $this->initializeFinder();
@@ -54,6 +62,9 @@ final class RoutesCollector
         return $this->routes;
     }
 
+    /**
+     * @return Finder
+     */
     private function initializeFinder(): Finder
     {
         $finder = new Finder();
@@ -63,6 +74,11 @@ final class RoutesCollector
         return $finder->files()->in($this->folder)->name('*Controller.php')->notName('AbstractController.php');
     }
 
+    /**
+     * @param $file
+     *
+     * @return void
+     */
     private function processControllerFile($file): void
     {
         $fileName = basename($file->getFilename(), '.php');
@@ -74,12 +90,24 @@ final class RoutesCollector
         }
     }
 
+    /**
+     * @param $fileContents
+     *
+     * @return string
+     */
     private function extractNamespace($fileContents): string
     {
         preg_match('/(namespace )(.*?)(;)/', $fileContents, $matches);
         return $matches[2] ?? '';
     }
 
+    /**
+     * @param \ReflectionMethod $method
+     *
+     * @return void
+     *
+     * @throws \Exception
+     */
     private function addRouteFromMethod(\ReflectionMethod $method): void
     {
         if ($this->hasValidRoute($method)) {
@@ -90,6 +118,13 @@ final class RoutesCollector
         }
     }
 
+    /**
+     * @param \ReflectionMethod $method
+     *
+     * @return void
+     *
+     * @throws \Exception
+     */
     private function validateResponseReturnType(\ReflectionMethod $method): void
     {
         if (!$this->matchResponseReturn($method)) {
@@ -103,6 +138,13 @@ final class RoutesCollector
         }
     }
 
+    /**
+     * @param \ReflectionMethod $method
+     * @param $route
+     * @param array $arguments
+     *
+     * @return void
+     */
     private function setControllerArguments(\ReflectionMethod $method, $route, array &$arguments): void
     {
         $arguments['_controller'] = $method->getDeclaringClass()->getName() . '::' . $method->getName();
@@ -121,12 +163,20 @@ final class RoutesCollector
         ));
     }
 
+    /**
+     * @param $route
+     *
+     * @return string
+     */
     private function getRoutePathWithoutVariables($route): string
     {
         $path = explode('/{', $route->getPath())[0];
         return (substr($path, 0, 1) !== '/') ? '/' . $path : $path;
     }
 
+    /**
+     * @return void
+     */
     private function checkErrors(): void
     {
         $this->loadWordpressUrls();
@@ -136,12 +186,18 @@ final class RoutesCollector
         }
     }
 
+    /**
+     * @return bool
+     */
     private function hasErrors(): bool
     {
         $this->checkErrors();
         return !empty($this->errors);
     }
 
+    /**
+     * @return void
+     */
     private function dispatchErrors(): void
     {
         $this->addWordpressAdminNotice();
@@ -150,6 +206,9 @@ final class RoutesCollector
         }
     }
 
+    /**
+     * @return void
+     */
     private function loadWordpressUrls(): void
     {
         $args = ['post_type' => ['post', 'page'], 'posts_per_page' => -1];
@@ -164,6 +223,9 @@ final class RoutesCollector
         wp_reset_query();
     }
 
+    /**
+     * @return void
+     */
     private function addWordpressAdminNotice(): void
     {
         add_action('admin_enqueue_scripts', function ($hook): void {
@@ -177,6 +239,9 @@ final class RoutesCollector
         });
     }
 
+    /**
+     * @return void
+     */
     private function addWordpressFrontNotice(): void
     {
         wp_enqueue_style('notice_alert', get_bloginfo('template_directory') . '/Router/assets/css/notice.css');
@@ -207,12 +272,20 @@ final class RoutesCollector
     }
 
 
-
+    /**
+     * @param $post
+     * @param \ReflectionMethod $method
+     *
+     * @return void
+     */
     private function addError($post, \ReflectionMethod $method): void
     {
         $this->errors[] = sprintf('%s a la même url que la méthode "::%s" de la classe "%s"', $post, $method->getName(), $method->getDeclaringClass()->getName());
     }
 
+    /**
+     * @return string|null
+     */
     private function createErrorMessage(): ?string
     {
         $errorCount = count($this->errors);
@@ -225,11 +298,23 @@ final class RoutesCollector
         return $message;
     }
 
+    /**
+     * @param \ReflectionMethod $method
+     *
+     * @return bool
+     */
     private function matchResponseReturn(\ReflectionMethod $method): bool
     {
         return $method->getReturnType() && $method->getReturnType()->getName() === 'Symfony\Component\HttpFoundation\Response';
     }
 
+    /**
+     * @param \ReflectionMethod $method
+     *
+     * @return array
+     *
+     * @throws \ReflectionException
+     */
     private function getMethodArguments(\ReflectionMethod $method): array
     {
         $arguments = [];
@@ -239,16 +324,35 @@ final class RoutesCollector
         return $arguments;
     }
 
+    /**
+     * @param \ReflectionMethod $method
+     *
+     * @return bool
+     */
     private function hasValidRoute(\ReflectionMethod $method): bool
     {
         return $this->reader->getMethodAnnotation($method, self::ROUTE_CLASS) !== null;
     }
 
+    /**
+     * @param \ReflectionMethod $method
+     *
+     * @return SiteRoute|null
+     */
     private function getRoute(\ReflectionMethod $method): ?SiteRoute
     {
         return $this->reader->getMethodAnnotation($method, self::ROUTE_CLASS);
     }
 
+
+    /**
+     * @param $fileName
+     * @param $namespace
+     *
+     * @return \ReflectionClass
+     *
+     * @throws \ReflectionException
+     */
     private function getReflectionClass($fileName, $namespace): \ReflectionClass
     {
         return new \ReflectionClass($namespace . '\\' . $fileName);

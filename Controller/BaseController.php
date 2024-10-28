@@ -60,6 +60,7 @@ abstract class BaseController
 
     /**
      * @param string $path
+     *
      * @return Response
      *
      * Method use to redirect user
@@ -73,6 +74,7 @@ abstract class BaseController
     /**
      * @param array $data
      * @param $code
+     *
      * @return JsonResponse
      *
      * Use this method to return json
@@ -82,5 +84,4 @@ abstract class BaseController
         $response = new JsonResponse($data, $code);
         return $response->send();
     }
-
 }
