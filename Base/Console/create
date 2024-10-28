@@ -10,44 +10,53 @@ require_once ( __DIR__ . '/EntityCreator/EntityCreate.php');
 require_once ( __DIR__ . '/TemplateCreator/TemplateCreate.php');
 require_once ( __DIR__ . '/Colors.php');
 
+echo "What do you want to create ?\n";
+echo message("0 : Entity\n");
+echo message("1 : Template\n");
+$choice = readline('Choose an option (0 ou 1) : ');
 
-$action = readline('Que voulez vous créer ? (entity/template) :');
+if($choice !== '0' && $choice !== '1') {
+    echo error('Invalid choice');
+    exit();
+}
+$action = $choice === '0' ? 'entity' : 'template';
+
 if($action === 'entity') {
-    $entityName = readline('Donnez lui un nom pour le code (Post, Article ...) :');
-    $singular   = readline('Son nom en Francais pour l\'affichage au singulier (Article, Journal ...) :');
-    $plurial    = readline('Son nom en Francais pour l\'affichage au pluriel (Articles, Journaux ...) :');
+    $entityName = readline('Give it a CamelCaseName (Post, Article ...) :');
+    $singular   = readline('Give it a name in your language for singular display (Article, Recipe ...) :');
+    $plural     = readline('Give it a name in your language for plural display  (Articles, Recipes ...) :');
 }
 
 if($action === 'template') {
-    $className          = readline('slug :');
-    $frenchTemplateName = readline('Son nom en Francais (Affichage article; page publication ...) :');
+    $slug         = readline('slug name (Example : recipes-book) :');
+    $templateName = readline('Its name in your language (Example : All my recipes ...) :');
 }
 
 if ($action) {
     switch ($action) {
         case 'entity':
-            if ($entityName && $singular && $plurial) {
+            if ($entityName && $singular && $plural) {
                 $creator = new EntityCreate([
                     'entity' => $entityName,
                     'singular' => $singular,
-                    'plurial' => $plurial
+                    'plural' => $plural
                 ]);
                 $creator->create();
                 echo $creator->getMessage()['status']($creator->getMessage()['message']);
             } else {
-                echo error('Il manque des arguments ! Attendus : php console/create entity "entityName" "singular name" "plurial name"');
+                echo error('Missing arguments ! Wanted : php console/create entity "entityName" "singular name" "plurial name"');
             }
             break;
         case 'template':
-            if ($className && $frenchTemplateName) {
+            if ($slug && $templateName) {
                 $creator = new TemplateCreate([
-                    'className' => $className,
-                    'frenchName' => $frenchTemplateName,
+                    'className' => $slug,
+                    'frenchName' => $templateName,
                 ]);
                 $creator->create();
                 echo $creator->getMessage()['status']($creator->getMessage()['message']);
             } else {
-                echo error('Il manque des arguments ! Attendus : php console/create template "className" "french name"');
+                echo error('Missing arguments ! Wanted : php console/create template "slug" "template name"');
             }
             break;
 
@@ -56,7 +65,7 @@ if ($action) {
             break;
     }
 } else {
-    echo error("Vous n'avez pas précisé ce que vous vouliez créer");
+    echo error("You didn't specify what you wanted to create");
 }
 
 /**
@@ -66,7 +75,7 @@ if ($action) {
 function error($error): string
 {
     if(!$error || $error === '') {
-        $error = 'Nous n\'avons pas réussi à déterminer la source de l\'erreur';
+        $error = 'We were unable to determine the source of the error';
     }
     $colors = new Colors();
     return $colors->getColoredString(
@@ -95,7 +104,7 @@ function nothing(): string
 {
     $colors = new Colors();
     return $colors->getColoredString(
-        PHP_EOL . PHP_EOL . ':-| ********** ??? ***********' . PHP_EOL . 'Rien n\'a été effectué' . PHP_EOL . '******************************' . PHP_EOL . PHP_EOL,
+        PHP_EOL . PHP_EOL . ':-| ********** ??? ***********' . PHP_EOL . 'Nothing has been done' . PHP_EOL . '******************************' . PHP_EOL . PHP_EOL,
         'yellow'
     );
 }
