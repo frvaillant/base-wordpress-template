@@ -57,14 +57,22 @@ $twig->addFunction(
 
 $twig->addFunction(
     new \Twig\TwigFunction('get_permalink', static function () {
-        return 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
+        $https = isset($_SERVER['HTTPS']) ? 's' : '';
+        return 'http' . $https . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
     })
 );
 
 
-$twig->addFunction(new \Twig\TwigFunction('asset', static function ($asset) {
-    return sprintf(get_bloginfo('template_directory') . '/public/build/%s', ltrim($asset, '/'));
-}));
+$twig->addFunction(
+    new \Twig\TwigFunction('asset',
+        static function ($asset) {
+            return sprintf(
+                get_bloginfo('template_directory') . '/public/build/%s',
+                ltrim($asset, '/')
+            );
+        }
+    )
+);
 
 $twig->addFunction(
     new \Twig\TwigFunction('footer', static function () {
@@ -91,7 +99,10 @@ $twig->addFunction(
 );
 
 $twig->addFunction(
-    new \Twig\TwigFunction('get_the_post_thumbnail_url', static function($postId) {
-        return get_the_post_thumbnail_url($postId);
-    })
+    new \Twig\TwigFunction(
+        'get_the_post_thumbnail_url',
+        static function($postId) {
+            return get_the_post_thumbnail_url($postId);
+        }
+    )
 );

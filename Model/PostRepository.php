@@ -24,7 +24,7 @@ final class PostRepository extends BaseRepository
             'posts_per_page'    => $this->limit,
             'post_status'       => 'publish',
             'orderby'			=> 'post_date',
-            'order'				=> 'DESC'
+            'order'				=> 'DESC',
         ];
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }
@@ -41,7 +41,7 @@ final class PostRepository extends BaseRepository
             'post_status'       => 'publish',
             'paged'             => $paged,
             'orderby'			=> 'post_date',
-            'order'				=> 'DESC'
+            'order'				=> 'DESC',
         ];
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }

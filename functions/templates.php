@@ -23,20 +23,20 @@ foreach ($theme_templates as $templateInformations) {
     add_filter(
         'template_include',
         function($template) use($templateInformations) {
-        $page_template = get_page_template_slug();
+            $page_template = get_page_template_slug();
 
-        if ($page_template === $templateInformations->getIdentifier()) {
-            $controllerName = $templateInformations->getController();
-            $controller = new $controllerName();
-            $parameters = [];
+            if ($page_template === $templateInformations->getIdentifier()) {
+                $controllerName = $templateInformations->getController();
+                $controller = new $controllerName();
+                $parameters = [];
 
-            $injector = new DependencyInjector($controllerName);
+                $injector = new DependencyInjector($controllerName);
 
-            $injector->autoloadDependencies($templateInformations, $parameters);
+                $injector->autoloadDependencies($templateInformations, $parameters);
 
-            $controller->{$templateInformations->getMethod()}(...$parameters);
-            exit;
-        }
+                $controller->{$templateInformations->getMethod()}(...$parameters);
+                exit;
+            }
         return $template;
         }
     );

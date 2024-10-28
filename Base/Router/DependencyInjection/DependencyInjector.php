@@ -4,7 +4,6 @@ namespace App\Base\Router\DependencyInjection;
 
 final class DependencyInjector
 {
-
     private string $controllerName;
     private \ReflectionClass $class;
 
@@ -12,7 +11,6 @@ final class DependencyInjector
     {
         $this->controllerName = $controllerName;
         $this->class = new \ReflectionClass($controllerName);
-
     }
 
     /**
@@ -28,5 +26,4 @@ final class DependencyInjector
             $parameters[] = $className ? new $className() : null;
         }
     }
-
 }

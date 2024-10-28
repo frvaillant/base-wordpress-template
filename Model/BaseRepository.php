@@ -5,7 +5,6 @@ namespace App\Model;
 
 abstract class BaseRepository
 {
-
     protected $wpdb;
     /**
      * @var \App\Model\EntityProvider
@@ -18,7 +17,6 @@ abstract class BaseRepository
         $this->wpdb = $wpdb;
 
         $this->provider = new EntityProvider();
-
     }
 
     protected function getPostLimit()

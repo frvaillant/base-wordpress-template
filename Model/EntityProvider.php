@@ -17,6 +17,5 @@ final class EntityProvider
             $results[] = new $className($result->ID);
         }
         return $results;
-
     }
 }

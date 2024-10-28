@@ -21,7 +21,7 @@ final class PageRepository extends BaseRepository
             'numberposts'       => 1,
             'post_status'       => 'publish',
             'orderby'			=> 'post_date',
-            'order'				=> 'DESC'
+            'order'				=> 'DESC',
         ];
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }

@@ -8,8 +8,3 @@ include __DIR__ . '/functions/entities.php';
 
 
 add_theme_support( 'post-thumbnails' );
-
-
-
-
-
