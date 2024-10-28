@@ -95,7 +95,3 @@ $twig->addFunction(
         return get_the_post_thumbnail_url($postId);
     })
 );
-
-
-$twig->addGlobal('_get', $_GET);
-$twig->addGlobal('_post', $_POST);
