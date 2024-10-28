@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Base\Router\Utils;
 
 final class Tools

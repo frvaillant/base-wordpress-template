@@ -6,6 +6,7 @@ use App\Base\Service\CustomPostFactory;
 
 /**
  * @param Entity $entity
+ *
  * @return void
  */
 function create_custom_post_type(Entity $entity): void
@@ -27,4 +28,4 @@ function entities(): void
     }
 }
 
-add_action('init', 'entities', 0 );
+add_action('init', 'entities', 0);

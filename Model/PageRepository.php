@@ -27,5 +27,4 @@ final class PageRepository extends BaseRepository
         ];
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }
-
 }

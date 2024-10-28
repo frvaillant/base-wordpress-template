@@ -9,7 +9,6 @@ namespace App\Base\Annotations;
 
 use Doctrine\Common\Annotations\Annotation;
 
-
 /**
  * @Annotation
  */

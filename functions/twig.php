@@ -6,7 +6,7 @@
 $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../View');
 $twig = new Twig\Environment($loader, [
     'debug' => true,
-    'autoescape' => false
+    'autoescape' => false,
 ]);
 
 /**
@@ -16,13 +16,11 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 $twig->addExtension(new \Twig\Extra\CssInliner\CssInlinerExtension());
 
-
 $twig->addFunction(
     new \Twig\TwigFunction('page_link', static function ($param) {
         return get_page_link($param);
     })
 );
-
 
 $twig->addFunction(
     new \Twig\TwigFunction('get_search_form', static function () {
@@ -42,7 +40,6 @@ $twig->addFunction(
     })
 );
 
-
 $twig->addFunction(
     new \Twig\TwigFunction('get_page_by_title', static function ($title) {
         return get_page_by_title($title);
@@ -61,7 +58,6 @@ $twig->addFunction(
         return 'http' . $https . '://' . "{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
     })
 );
-
 
 $twig->addFunction(
     new \Twig\TwigFunction('asset',

@@ -11,10 +11,13 @@ foreach ($theme_templates as $templateInformations) {
     /**
      * Adding templates to WP
      */
-    add_filter('theme_page_templates', static function($templates) use ($templateInformations) {
-        $templates[$templateInformations->getIdentifier()] = $templateInformations->getName();
-        return $templates;
-    });
+    add_filter(
+        'theme_page_templates',
+        static function ($templates) use ($templateInformations) {
+            $templates[$templateInformations->getIdentifier()] = $templateInformations->getName();
+            return $templates;
+        }
+    );
 
     /**
      * Adding controllers to templates
@@ -36,7 +39,7 @@ foreach ($theme_templates as $templateInformations) {
                 $controller->{$templateInformations->getMethod()}(...$parameters);
                 exit;
             }
-        return $template;
+            return $template;
         }
     );
 }

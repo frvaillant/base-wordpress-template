@@ -30,18 +30,18 @@ final class CustomPostFactory
     public function createCustomPostLabels(): array
     {
         return [
-            'name'                => _x( $this->plural, 'Post Type General Name'),
-            'singular_name'       => _x( $this->singular, 'Post Type Singular Name'),
-            'menu_name'           => __($this->plural),
-            'all_items'           => __( 'Les ' . $this->plural),
-            'view_item'           => __( 'Voir les ' .$this->plural),
-            'add_new_item'        => __( 'Ajouter 1 ' . $this->singular),
-            'add_new'             => __( 'Ajouter'),
-            'edit_item'           => __( 'Editer ' . $this->singular),
-            'update_item'         => __( 'Modifier ' . $this->singular),
-            'search_items'        => __( 'Rechercher ' . $this->singular),
-            'not_found'           => __( 'Non trouvé'),
-            'not_found_in_trash'  => __( 'Non trouvé dans la corbeille'),
+            'name' => _x( $this->plural, 'Post Type General Name'),
+            'singular_name' => _x( $this->singular, 'Post Type Singular Name'),
+            'menu_name' => __($this->plural),
+            'all_items' => __( 'Les ' . $this->plural),
+            'view_item' => __( 'Voir les ' .$this->plural),
+            'add_new_item' => __( 'Ajouter 1 ' . $this->singular),
+            'add_new' => __( 'Ajouter'),
+            'edit_item' => __( 'Editer ' . $this->singular),
+            'update_item' => __( 'Modifier ' . $this->singular),
+            'search_items' => __( 'Rechercher ' . $this->singular),
+            'not_found' => __( 'Non trouvé'),
+            'not_found_in_trash' => __( 'Non trouvé dans la corbeille'),
         ];
     }
 
@@ -51,17 +51,16 @@ final class CustomPostFactory
     public function createCustomPostArguments(): array
     {
         return [
-            'label'               => __($this->plural),
-            'description'         => __( 'Tous sur les ' . $this->plural),
-            'labels'              => $this->createCustomPostLabels(),
-            'supports'            => $this->supports,
-            'taxonomies'          => ['post_tag'],
-            'show_in_rest'        => true,
-            'hierarchical'        => false,
-            'public'              => true,
-            'has_archive'         => true,
-            'rewrite'			  => ['slug' => $this->entityName],
-
+            'label' => __($this->plural),
+            'description' => __( 'Tous sur les ' . $this->plural),
+            'labels' => $this->createCustomPostLabels(),
+            'supports' => $this->supports,
+            'taxonomies' => ['post_tag'],
+            'show_in_rest' => true,
+            'hierarchical' => false,
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => ['slug' => $this->entityName],
         ];
     }
 }

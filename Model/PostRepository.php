@@ -21,11 +21,11 @@ final class PostRepository extends BaseRepository
     public function getLastPost(): array
     {
         $args = [
-            'post_type'         => 'post',
-            'posts_per_page'    => $this->limit,
-            'post_status'       => 'publish',
-            'orderby'			=> 'post_date',
-            'order'				=> 'DESC',
+            'post_type' => 'post',
+            'posts_per_page' => $this->limit,
+            'post_status' => 'publish',
+            'orderby' => 'post_date',
+            'order' => 'DESC',
         ];
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }
@@ -38,12 +38,12 @@ final class PostRepository extends BaseRepository
     public function getAllPosts(int $paged = 1): array
     {
         $args = [
-            'post_type'         => 'post',
-            'posts_per_page'    => $this->limit,
-            'post_status'       => 'publish',
-            'paged'             => $paged,
-            'orderby'			=> 'post_date',
-            'order'				=> 'DESC',
+            'post_type' => 'post',
+            'posts_per_page' => $this->limit,
+            'post_status' => 'publish',
+            'paged' => $paged,
+            'orderby' => 'post_date',
+            'order' => 'DESC',
         ];
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }

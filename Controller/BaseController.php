@@ -34,6 +34,7 @@ abstract class BaseController
 
     /**
      * @param string $content
+     *
      * @return Response
      *
      * Use this method to return html
@@ -44,7 +45,6 @@ abstract class BaseController
         $this->response->setStatusCode(200);
         return $this->response->send();
     }
-
 
     /**
      * @throws RuntimeError

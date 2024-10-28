@@ -22,5 +22,4 @@ abstract class BaseRepository
     {
         return get_option('posts_per_page');
     }
-
 }

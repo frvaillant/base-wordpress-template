@@ -42,7 +42,8 @@ final class Colors
     }
 
     // Returns colored string
-    public function getColoredString($string, $foreground_color = null, $background_color = null) {
+    public function getColoredString($string, $foreground_color = null, $background_color = null)
+    {
         $colored_string = '';
 
         // Check if given foreground color found
@@ -61,16 +62,18 @@ final class Colors
     }
 
     /**
-     * Returns all foreground color names
-    **/
-    public function getForegroundColors() {
+     * Returns all foreground colors
+     */
+    public function getForegroundColors()
+    {
         return array_keys($this->foreground_colors);
     }
 
     /**
      * Returns all background color names
-    **/
-    public function getBackgroundColors() {
+     */
+    public function getBackgroundColors()
+    {
         return array_keys($this->background_colors);
     }
 }

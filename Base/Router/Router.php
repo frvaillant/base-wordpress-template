@@ -50,7 +50,7 @@ final class Router
      */
     public function __construct()
     {
-        $this->request        = Request::createFromGlobals();
+        $this->request = Request::createFromGlobals();
         $this->routesCollector = new RoutesCollector();
         $this->initRoutes();
         $this->makeUrlMatcher();
@@ -116,7 +116,7 @@ final class Router
      */
     private function initRoutes(): void
     {
-        $this->routes      = $this->routesCollector->getRoutes();
+        $this->routes = $this->routesCollector->getRoutes();
         $this->routesPaths = $this->routesCollector->getRoutesPaths();
     }
 
