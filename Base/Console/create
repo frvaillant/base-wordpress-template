@@ -3,6 +3,7 @@
 
 use App\Base\Console\Colors;
 use App\Base\Console\EntityCreator\EntityCreate;
+use App\Base\Console\TemplateCreator\TemplateCreate;
 
 require_once ( __DIR__ . '/BaseCreator.php');
 require_once ( __DIR__ . '/EntityCreator/EntityCreate.php');
