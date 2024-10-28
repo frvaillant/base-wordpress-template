@@ -4,8 +4,8 @@ namespace App\Base\Console;
 
 abstract class BaseCreator
 {
-    protected bool $success;
-    protected $error;
+    protected string $success;
+    protected string $error;
 
     /**
      * @return array

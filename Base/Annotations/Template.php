@@ -35,8 +35,7 @@ final class Template
 
 
     /**
-     * @param string $identifier
-     * @param string $name
+     * @param array $params
      */
     public function __construct(array $params)
     {

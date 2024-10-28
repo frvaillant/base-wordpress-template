@@ -12,7 +12,7 @@ final class HomeController extends BaseController
     }
 
     /**
-     * @return string
+     * @return Response
      *
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError

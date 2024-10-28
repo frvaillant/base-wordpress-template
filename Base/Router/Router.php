@@ -110,9 +110,7 @@ final class Router
 
 
     /**
-     * @return RouteCollection
-     *
-     * @throws \ReflectionException
+     * @return void
      */
     private function initRoutes(): void
     {
@@ -132,7 +130,7 @@ final class Router
     }
 
     /**
-     * @return UrlMatcher
+     * @return void
      */
     private function makeUrlMatcher(): void
     {

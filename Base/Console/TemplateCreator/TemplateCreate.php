@@ -97,7 +97,7 @@ final class TemplateCreate extends BaseCreator
     /**
      * @return void
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function createController(): void
     {
@@ -116,7 +116,7 @@ final class TemplateCreate extends BaseCreator
     /**
      * @return void
      *
-     * @throws Exception
+     * @throws \Exception
      */
     private function createTwig(): void
     {

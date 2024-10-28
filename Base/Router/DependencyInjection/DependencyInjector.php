@@ -4,7 +4,6 @@ namespace App\Base\Router\DependencyInjection;
 
 final class DependencyInjector
 {
-    private string $controllerName;
     private \ReflectionClass $class;
 
     public function __construct(string $controllerName)
@@ -24,7 +23,7 @@ final class DependencyInjector
     public function autoloadDependencies($templateInformations, &$parameters): void
     {
         foreach($this->class->getMethod($templateInformations->getMethod())->getParameters() as $parameter) {
-            $className = $parameter?->getType()?->getName();
+            $className = $parameter->getType()->getName();
             $parameters[] = $className ? new $className() : null;
         }
     }

@@ -15,10 +15,6 @@ abstract class BaseController
      * @var \Twig\Environment
      */
     protected $twig;
-    /**
-     * @var array
-     */
-    private $config;
 
     /**
      * @var Response
