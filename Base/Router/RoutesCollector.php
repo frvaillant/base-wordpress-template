@@ -158,7 +158,7 @@ final class RoutesCollector
         $this->wordpressUrls = [];
         while ($results->have_posts()) {
             $results->the_post();
-            global $post;
+            $post = $GLOBALS['post'];
             $this->wordpressUrls[get_permalink($post->ID)] = sprintf('%s "%s" (%d)', $post->post_type, $post->post_title, $post->ID);
         }
         wp_reset_query();

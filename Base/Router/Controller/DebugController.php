@@ -8,7 +8,7 @@ final class DebugController extends BaseController
 
     public function index()
     {
-        global $_ROUTER;
+        $_ROUTER = $GLOBALS['_ROUTER'];
 
         $routes       = $_ROUTER->getRoutesPaths();
         $wordpressUrl = $_ROUTER->getWordpressUrls();
