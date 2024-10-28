@@ -65,7 +65,7 @@ final class TemplateCreate extends BaseCreator
      */
     private function makeTemplateName(array $names): string
     {
-        return implode('', array_map(function($value) {
+        return implode('', array_map(function ($value) {
             return ucfirst($value);
         }, $names));
     }
@@ -77,7 +77,7 @@ final class TemplateCreate extends BaseCreator
      */
     private function makeSlug(array $names): string
     {
-        return implode('-', array_map(function($value) {
+        return implode('-', array_map(function ($value) {
             return $value;
         }, $names));
     }
@@ -89,7 +89,7 @@ final class TemplateCreate extends BaseCreator
      */
     private function makeFolderName(array $names): string
     {
-        return ucfirst(implode('_', array_map(function($value) {
+        return ucfirst(implode('_', array_map(function ($value) {
             return strtolower($value);
         }, $names)));
     }
@@ -110,7 +110,7 @@ final class TemplateCreate extends BaseCreator
             file_put_contents(self::CONTROLLER_FOLDER . '/' . ucfirst($this->templateName) . 'Controller.php', $source);
             return;
         }
-        throw new \Exception('Le fichier source est introuvable');
+        throw new \Exception('Source file is not found');
 
     }
 
@@ -127,7 +127,7 @@ final class TemplateCreate extends BaseCreator
             file_put_contents(self::VIEW_FOLDER . '/' . $this->twigFolderName . '/index.html.twig', $source);
             return;
         }
-        throw new \Exception('Impossible de créer le template twig');
+        throw new \Exception('Impossible to create twig template');
     }
 
     /**
@@ -138,7 +138,7 @@ final class TemplateCreate extends BaseCreator
         try {
             $this->createController();
             $this->createTwig();
-            $this->success = "Créations du template, controller et fichier twig réussies";
+            $this->success = 'Controller and twig template successfully created';
         } catch (\Exception $e) {
             $this->error = $e->getMessage();
         }

@@ -11,7 +11,7 @@ use App\Base\Service\CustomPostFactory;
 function create_custom_post_type(Entity $entity): void
 {
     $cptFactory = new CustomPostFactory($entity);
-    register_post_type( $entity->getName(), $cptFactory->createCustomPostArguments());
+    register_post_type($entity->getName(), $cptFactory->createCustomPostArguments());
 }
 
 /**
@@ -27,4 +27,4 @@ function entities(): void
     }
 }
 
-add_action( 'init', 'entities', 0 );
+add_action('init', 'entities', 0 );

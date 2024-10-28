@@ -8,7 +8,6 @@ final class EntityNameRepository  extends BaseRepository
 {
     public const CLASSNAME = 'App\Entity\EntityName';
 
-
     public function __construct()
     {
         parent::__construct();

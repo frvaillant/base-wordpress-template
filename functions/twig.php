@@ -4,7 +4,7 @@
  * Prepare twig renderer
  */
 $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../View');
-$twig   = new Twig\Environment($loader, [
+$twig = new Twig\Environment($loader, [
     'debug' => true,
     'autoescape' => false
 ]);
@@ -101,7 +101,7 @@ $twig->addFunction(
 $twig->addFunction(
     new \Twig\TwigFunction(
         'get_the_post_thumbnail_url',
-        static function($postId) {
+        static function ($postId) {
             return get_the_post_thumbnail_url($postId);
         }
     )

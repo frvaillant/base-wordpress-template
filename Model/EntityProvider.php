@@ -4,7 +4,6 @@ namespace App\Model;
 
 final class EntityProvider
 {
-
     /**
      * @param $queryResults
      * @param $className

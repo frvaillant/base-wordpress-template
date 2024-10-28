@@ -31,7 +31,7 @@ final class EntityCreate extends BaseCreator
     {
         $this->arguments = $arguments;
         $names = explode(' ', $arguments['entity']);
-        $this->name = implode('', array_map(function($value) {
+        $this->name = implode('', array_map(function ($value) {
             return ucfirst($value);
         }, $names));
     }
@@ -84,7 +84,7 @@ final class EntityCreate extends BaseCreator
         try {
             $this->createEntityFile();
             $this->createRepository();
-            $this->success = "Créations de l'entité et du repository réussies";
+            $this->success = 'Entity and repository successfully created';
         } catch (\Exception $e) {
             $this->error = $e->getMessage();
         }

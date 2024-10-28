@@ -6,7 +6,8 @@ namespace App\Base\Console;
  * Class Colors
  * Paternity : https://www.if-not-true-then-false.com/2010/php-class-for-coloring-php-command-line-cli-scripts-output-php-output-colorizing-using-bash-shell-colors/
  */
-final class Colors {
+final class Colors
+{
     private array $foreground_colors = [
         'black' => '0;30',
         'dark_gray' => '1;30',
@@ -43,15 +44,15 @@ final class Colors {
 
     // Returns colored string
     public function getColoredString($string, $foreground_color = null, $background_color = null) {
-        $colored_string = "";
+        $colored_string = '';
 
         // Check if given foreground color found
         if (isset($this->foreground_colors[$foreground_color])) {
-            $colored_string .= "\033[" . $this->foreground_colors[$foreground_color] . "m";
+            $colored_string .= "\033[" . $this->foreground_colors[$foreground_color] . 'm';
         }
         // Check if given background color found
         if (isset($this->background_colors[$background_color])) {
-            $colored_string .= "\033[" . $this->background_colors[$background_color] . "m";
+            $colored_string .= "\033[" . $this->background_colors[$background_color] . '';
         }
 
         // Add string and end coloring

@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ControllerNameController extends BaseController
 {
-
     public function __construct()
     {
         parent::__construct();

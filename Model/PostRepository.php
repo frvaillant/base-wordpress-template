@@ -54,9 +54,9 @@ final class PostRepository extends BaseRepository
     public function countPosts(): ?int
     {
         $args = [
-            'post_type'         => 'post',
-            'posts_per_page'    => -1,
-            'post_status'       => 'publish',
+            'post_type' => 'post',
+            'posts_per_page' => -1,
+            'post_status' => 'publish',
         ];
         return count(get_posts($args));
     }

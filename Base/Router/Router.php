@@ -15,7 +15,6 @@ use Symfony\Component\Routing\RouteCollection;
 
 final class Router
 {
-
     /**
      * @var Request
      */

@@ -9,7 +9,6 @@ use App\Base\Annotations\Entity;
  */
 final class CustomPostFactory
 {
-
     private Entity $entity;
     private string $entityName;
     private string $singular;
