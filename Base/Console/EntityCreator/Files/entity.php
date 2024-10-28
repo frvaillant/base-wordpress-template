@@ -1,5 +1,5 @@
 <?php
-/*
+
 namespace App\Entity;
 
 use App\Base\Annotations\Entity;
@@ -11,4 +11,3 @@ final class EntityName extends BaseEntity
         parent::__construct($postId);
     }
 }
-*/

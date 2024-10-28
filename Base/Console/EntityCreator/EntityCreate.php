@@ -46,11 +46,20 @@ final class EntityCreate extends BaseCreator
     {
         $source = file_get_contents(__DIR__ . '/Files/entity.php');
         if ($source) {
-            $source = str_replace(['/*', '*/'], ['', ''], $source);
+
             $source = str_replace('EntityName', ucfirst($this->name), $source);
             $annotation = sprintf(self::ANNOTATION, ucfirst($this->name), $this->arguments['singular'], $this->arguments['plural']);
-            $source = str_replace('class', $annotation . 'class', $source);
-            file_put_contents(self::ENTITY_FOLDER . '/' . ucfirst($this->name) . '.php', $source);
+            $source = str_replace('final class', $annotation . 'final class', $source);
+
+            $entityFileName = ucfirst($this->name) . '.php';
+
+            if(! file_exists(self::ENTITY_FOLDER . '/' . $entityFileName)) {
+                file_put_contents(self::ENTITY_FOLDER . '/' . $entityFileName, $source);
+            } else {
+                echo error($entityFileName . ' already exists');
+                exit;
+            }
+
             return;
         }
         throw new \Exception('Entity source file is not found');
@@ -65,15 +74,23 @@ final class EntityCreate extends BaseCreator
     {
         $source = file_get_contents(__DIR__ . '/Files/repository.php');
         if ($source) {
-            $source = str_replace(['/*', '*/'], ['', ''], $source);
+
             $source = str_replace('EntityName', ucfirst($this->name), $source);
             $source = str_replace('entitynamelower', strtolower($this->name), $source);
-            file_put_contents(self::MODEL_FOLDER . '/' . ucfirst($this->name) . 'Repository.php', $source);
+
+            $repositoryFileName = ucfirst($this->name) . 'Repository.php';
+
+            if(! file_exists(self::MODEL_FOLDER . '/' . $repositoryFileName)) {
+                file_put_contents(self::MODEL_FOLDER . '/' . $repositoryFileName, $source);
+            } else {
+                echo error($repositoryFileName . ' already exists');
+                exit;
+            }
+
             return;
         }
         throw new \Exception('Repository source file is not found');
     }
-
 
     /**
      * @return void

@@ -1,5 +1,5 @@
 <?php
-/*
+
 namespace App\Model;
 
 use App\Model\EntityProvider;
@@ -13,6 +13,9 @@ final class EntityNameRepository  extends BaseRepository
         parent::__construct();
     }
 
+    /**
+     * @return array
+     */
     public function findAll(): array
     {
         $args = [
@@ -25,4 +28,3 @@ final class EntityNameRepository  extends BaseRepository
         return $this->provider->provide(query_posts($args), self::CLASSNAME);
     }
 }
-*/

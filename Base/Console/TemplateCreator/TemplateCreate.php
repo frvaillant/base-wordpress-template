@@ -90,7 +90,7 @@ final class TemplateCreate extends BaseCreator
     private function makeFolderName(array $names): string
     {
         return ucfirst(implode('_', array_map(static function ($value) {
-            return strtolower($value);
+            return $value;
         }, $names)));
     }
 
@@ -104,10 +104,17 @@ final class TemplateCreate extends BaseCreator
         $source = file_get_contents(__DIR__ . '/Files/controller.php');
         if($source) {
             $source = str_replace('ControllerName', $this->templateName, $source);
-            $source = str_replace(['/*', '*/'], ['', ''], $source);
-            $annotation = sprintf(self::ANNOTATION, $this->slug, $this->frenchName);
-            $source = str_replace('public function index', $annotation . 'public function index', $source);
-            file_put_contents(self::CONTROLLER_FOLDER . '/' . ucfirst($this->templateName) . 'Controller.php', $source);
+            $source = str_replace('%identifier%', $this->slug, $source);
+            $source = str_replace('%name%', $this->frenchName, $source);
+
+            $controllerName = ucfirst($this->templateName) . 'Controller.php';
+
+            if(! file_exists(self::CONTROLLER_FOLDER . '/' . $controllerName)) {
+                file_put_contents(self::CONTROLLER_FOLDER . '/' . $controllerName, $source);
+            } else {
+                echo error($controllerName . ' already exists');
+                exit;
+            }
             return;
         }
         throw new \Exception('Source file is not found');
@@ -122,9 +129,10 @@ final class TemplateCreate extends BaseCreator
     {
         $source = file_get_contents(__DIR__ . '/Files/index.html.twig');
         if($source) {
-            $this->createDir(self::VIEW_FOLDER . '/' . $this->twigFolderName);
-            file_put_contents(self::VIEW_FOLDER . '/' . $this->twigFolderName . '/index.html.twig', $source);
-            return;
+            if ($this->createDir(self::VIEW_FOLDER . '/' . $this->twigFolderName)) {
+                file_put_contents(self::VIEW_FOLDER . '/' . $this->twigFolderName . '/index.html.twig', $source);
+                return;
+            }
         }
         throw new \Exception('Impossible to create twig template');
     }

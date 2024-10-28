@@ -1,5 +1,5 @@
 <?php
-/*
+
 namespace App\Controller;
 
 use App\Base\Annotations\Template;
@@ -12,10 +12,15 @@ final class ControllerNameController extends BaseController
         parent::__construct();
     }
 
+    /**
+     * @return Response
+     *
+     * @Template(identifier="%identifier%", name="%name%")
+     */
     public function index(): Response
     {
         return $this->render('ControllerName/index.html.twig', [
         ]);
     }
 }
-*/
+
