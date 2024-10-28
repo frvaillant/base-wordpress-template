@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model;
 
 final class PostRepository extends BaseRepository

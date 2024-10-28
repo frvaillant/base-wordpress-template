@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Base\Console\TemplateCreator;
 
 use App\Base\Console\BaseCreator;

@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Model;
+
 final class PageRepository extends BaseRepository
 {
     public const CLASSNAME = 'App\Entity\Page';

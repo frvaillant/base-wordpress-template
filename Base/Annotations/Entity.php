@@ -4,6 +4,7 @@
  * For example : @Entity(name="Video", singular="vidéo", plural="vidéos")
  * It generates a WP CPT (custom post) to be managed in dashboard
  */
+
 namespace App\Base\Annotations;
 
 use Doctrine\Common\Annotations\Annotation;

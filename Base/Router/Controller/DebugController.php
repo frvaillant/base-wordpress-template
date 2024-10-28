@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Base\Router\Controller;
+
 use App\Controller\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
