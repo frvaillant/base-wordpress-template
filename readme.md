@@ -7,10 +7,11 @@ Rends-toi dans le dossier "themes" de ton installation WordPress et clone ce rep
 `cd wp-content/themes`  
 `git clone https://github.com/frvaillant/base-wordpress-template your-desired-theme-folder-name`
 
-Ensuite, rends-toi dans le dossier créé et exécute les commandes suivantes :  
+Ensuite, rends-toi dans le dossier créé :  
 `cd your-desired-theme-folder-name`  
+et exécute les commandes suivantes :   
 `git remote remove origin`  
-Optionnel : `git remote add origin https://your-origin-repository.com`  
+`git remote add origin https://your-origin-repository.com`  
 `composer install`  
 `yarn install`  
 `yarn encore dev`  
@@ -38,8 +39,8 @@ Crée une première page depuis ton back-office et appelle-la "Catalogue des for
 ### Créer un template pour tes pages
 Dans ton terminal, rends-toi dans le dossier du thème et lance la commande :  
 `./create`  
-Cela te demandera ce que tu veux créer. Tape "template".  
-Donne-lui un nom comme "catalog", puis un nom compréhensible comme "Catalogue des formations".
+Cela te demandera ce que tu veux créer. Tape "1".  
+Donne-lui un slug comme "catalog", puis un nom compréhensible comme "Catalogue des formations".
 
 Un nouveau contrôleur a été créé dans le namespace App\Controller : `App\Controller\CatalogController`.  
 La méthode `index` de ce contrôleur devrait avoir une annotation "@Template..." qui ressemble à ça :  
@@ -59,7 +60,7 @@ et ainsi disposer d'un autre modèle pour d'autres pages liées aux formations.
 ### Créer une entité (custom post)
 Dans ton terminal, rends-toi dans le dossier du thème et lance la commande :
 `./create`  
-Cela te demandera ce que tu veux créer. Cette fois, tape "entity".  
+Cela te demandera ce que tu veux créer. Cette fois, tape "0".  
 Donne un nom pour la classe, comme "Formation", un nom pour le back-office au singulier "Formation", puis son nom au pluriel "Formations".  
 Tu disposes maintenant d'une entité sous forme d'un custom post disponible dans ton back-office.
 
@@ -97,11 +98,9 @@ Les vues utilisent Twig. Par défaut, ton contrôleur FormationController a une 
 /**
 * @Template(identifier="formation", name="Formation")
 **/
-public function index()
+public function index(): Response
     {
-        return $this->publish(
-            $this->twig->render('Formation/index.html.twig', [])
-        );
+        return $this->render('Formation/index.html.twig', []);
     }
 }
 ```
@@ -112,16 +111,14 @@ Tu peux la modifier comme ceci :
 /**
 * @Template(identifier="formation", name="Formation")
 **/
-public function index()
+public function index(): Response
     {
         $page = new \App\Entity\Page(get_the_ID());
         $formation = new \App\Entity\Formation(1);
-        return $this->publish(
-            $this->twig->render('Formation/index.html.twig', [
-                'page' => $page,
-                'formation' => $formation
-            ])
-        );
+        return $this->render('Formation/index.html.twig', [
+            'page' => $page,
+            'formation' => $formation
+        ]);
     }
 }
 ```
@@ -155,12 +152,10 @@ public function index(FormationRepository $formationRepository)
     {
         $page = new \App\Entity\Page(get_the_ID());
         $formations = $formationRepository->findAll();
-        return $this->publish(
-            $this->twig->render('Formation/index.html.twig', [
-                'page' => $page,
-                'formations' => $formations
-            ])
-        );
+        return $this->render('Formation/index.html.twig', [
+            'page' => $page,
+            'formations' => $formations
+        ]);
     }
 }
 ```
