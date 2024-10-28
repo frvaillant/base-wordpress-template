@@ -11,7 +11,7 @@ foreach ($theme_templates as $templateInformations) {
     /**
      * Adding templates to WP
      */
-    add_filter('theme_page_templates', function($templates) use ($templateInformations) {
+    add_filter('theme_page_templates', static function($templates) use ($templateInformations) {
         $templates[$templateInformations->getIdentifier()] = $templateInformations->getName();
         return $templates;
     });
@@ -21,7 +21,7 @@ foreach ($theme_templates as $templateInformations) {
      */
     add_filter(
         'template_include',
-        function($template) use ($templateInformations) {
+        static function($template) use ($templateInformations) {
             $page_template = get_page_template_slug();
 
             if ($page_template === $templateInformations->getIdentifier()) {

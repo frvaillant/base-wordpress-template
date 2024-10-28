@@ -25,7 +25,7 @@ final class PostController extends BaseController
         $post = get_post(get_the_id());
         $post = new Post($post->ID);
         return $this->render('Post/index.html.twig', [
-            'post' => $post
+            'post' => $post,
         ]);
     }
 }

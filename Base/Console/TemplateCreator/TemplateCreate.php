@@ -65,7 +65,7 @@ final class TemplateCreate extends BaseCreator
      */
     private function makeTemplateName(array $names): string
     {
-        return implode('', array_map(function ($value) {
+        return implode('', array_map(static function ($value) {
             return ucfirst($value);
         }, $names));
     }
@@ -77,7 +77,7 @@ final class TemplateCreate extends BaseCreator
      */
     private function makeSlug(array $names): string
     {
-        return implode('-', array_map(function ($value) {
+        return implode('-', array_map(static function ($value) {
             return $value;
         }, $names));
     }
@@ -89,7 +89,7 @@ final class TemplateCreate extends BaseCreator
      */
     private function makeFolderName(array $names): string
     {
-        return ucfirst(implode('_', array_map(function ($value) {
+        return ucfirst(implode('_', array_map(static function ($value) {
             return strtolower($value);
         }, $names)));
     }
@@ -111,7 +111,6 @@ final class TemplateCreate extends BaseCreator
             return;
         }
         throw new \Exception('Source file is not found');
-
     }
 
     /**

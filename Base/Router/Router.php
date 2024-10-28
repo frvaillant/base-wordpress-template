@@ -165,7 +165,7 @@ final class Router
         if(
             $route
             && count($this->routes->get($route)->getMethods()) > 0
-            && !in_array($this->request->getMethod(), $this->routes->get($route)->getMethods())
+            && ! in_array($this->request->getMethod(), $this->routes->get($route)->getMethods())
         ) {
             throw new MethodNotAllowedException($this->routes->get($route)->getMethods(), 'Method ' . $this->request->getMethod() . ' not allowed on route ' . $route);
         }

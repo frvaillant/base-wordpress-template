@@ -32,7 +32,8 @@ abstract class BaseEntity
     {
         $this->fields['tags'] = get_the_tags($postId) ?? [];
         if ($this->isAcfActive()) {
-            if($acfFields = get_fields($postId)) {
+            $acfFields = get_fields($postId);
+            if($acfFields) {
                 $this->hydrateEntity($acfFields);
             }
         }
@@ -54,8 +55,6 @@ abstract class BaseEntity
      * @param string $name
      * @param array $arguments
      *
-     * @return mixed|null
-     *
      * Allows twig accessing properties doing {{ entity.property }}
      * This avoids having to create getters for each field
      */
@@ -66,8 +65,6 @@ abstract class BaseEntity
 
     /**
      * @param string $name
-     *
-     * @return mixed|null
      *
      * Allow PHP code accessing properties doing $entity->propertyName
      * This avoids having to declare each field as public property in your entity

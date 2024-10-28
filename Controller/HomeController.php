@@ -21,7 +21,7 @@ final class HomeController extends BaseController
     public function index(): Response
     {
         return $this->render('index.html.twig', [
-            'acf_is_installed' => function_exists('acf_is_plugin_active') && acf_is_plugin_active()
+            'acf_is_installed' => function_exists('acf_is_plugin_active') && acf_is_plugin_active(),
         ]);
     }
 }

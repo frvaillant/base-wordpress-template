@@ -25,7 +25,7 @@ final class RoutesCollector
     private DocParser $parser;
     private DocReader $reader;
     private array $errors = [];
-    protected array $wordpressUrls = [];
+    private array $wordpressUrls = [];
 
     public function __construct()
     {
@@ -114,7 +114,7 @@ final class RoutesCollector
             $this->validateResponseReturnType($method);
             $route = $this->getRoute($method);
             $arguments = $this->getMethodArguments($method);
-            $this->setControllerArguments($method, $route, $arguments);
+            $this->defineControllerArguments($method, $route, $arguments);
         }
     }
 
@@ -127,7 +127,7 @@ final class RoutesCollector
      */
     private function validateResponseReturnType(\ReflectionMethod $method): void
     {
-        if (!$this->matchResponseReturn($method)) {
+        if (! $this->matchResponseReturn($method)) {
             throw new \Exception(
                 sprintf(
                     'La méthode %s du contrôleur %s ne renvoie pas une réponse valide',
@@ -145,7 +145,7 @@ final class RoutesCollector
      *
      * @return void
      */
-    private function setControllerArguments(\ReflectionMethod $method, $route, array &$arguments): void
+    private function defineControllerArguments(\ReflectionMethod $method, $route, array &$arguments): void
     {
         $arguments['_controller'] = $method->getDeclaringClass()->getName() . '::' . $method->getName();
         $routePath = $this->getRoutePathWithoutVariables($route);
@@ -171,7 +171,7 @@ final class RoutesCollector
     private function getRoutePathWithoutVariables($route): string
     {
         $path = explode('/{', $route->getPath())[0];
-        return (substr($path, 0, 1) !== '/') ? '/' . $path : $path;
+        return substr($path, 0, 1) !== '/' ? '/' . $path : $path;
     }
 
     /**
@@ -192,7 +192,7 @@ final class RoutesCollector
     private function hasErrors(): bool
     {
         $this->checkErrors();
-        return !empty($this->errors);
+        return count($this->errors) > 0;
     }
 
     /**
