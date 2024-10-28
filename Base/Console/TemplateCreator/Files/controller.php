@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Base\Annotations\Template;
+use Symfony\Component\HttpFoundation\Response;
 
 final class ControllerNameController extends BaseController
 {
@@ -13,12 +14,10 @@ final class ControllerNameController extends BaseController
         parent::__construct();
     }
 
-    public function index()
+    public function index(): Response
     {
-        return $this->publish(
-            $this->twig->render('ControllerName/index.html.twig', [
-            ])
-        );
+        return $this->render('ControllerName/index.html.twig', [
+        ]);
     }
 }
 */
