@@ -63,13 +63,18 @@ final class TemplatesCollector
             $namespace = $matches[2];
             $class = $this->getReflectionClass($fileName, $namespace);
             foreach ($class->getMethods() as $method) {
-                $templateInformations = $this->reader->getMethodAnnotation($method, Template::class);
-                if($templateInformations) {
-                    $templateInformations->defineController($class->getName());
-                    $templateInformations->defineControllerMethod($method->getName());
-                    $this->templates[] = $templateInformations;
-                }
+                $this->makeTemplateInformations($class, $method);
             }
+        }
+    }
+
+    private function makeTemplateInformations(\ReflectionClass $class, \ReflectionMethod $method): void
+    {
+        $templateInformations = $this->reader->getMethodAnnotation($method, Template::class);
+        if($templateInformations) {
+            $templateInformations->defineController($class->getName());
+            $templateInformations->defineControllerMethod($method->getName());
+            $this->templates[] = $templateInformations;
         }
     }
 

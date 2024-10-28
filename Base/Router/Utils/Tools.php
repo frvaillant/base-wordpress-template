@@ -1,7 +1,7 @@
 <?php
 namespace App\Base\Router\Utils;
 
-class Tools
+final class Tools
 {
 
     public static function plurial(array $array, string $plurial = 's', string $singular = '')
