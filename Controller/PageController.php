@@ -30,11 +30,8 @@ final class PageController extends BaseController
     public function page(): Response
     {
         $page = new Page(get_the_id());
-        $formation = new Formation(41);
-
         return $this->render('Page/index.html.twig', [
             'page' => $page,
-            'formation' => $formation
         ]);
     }
 
