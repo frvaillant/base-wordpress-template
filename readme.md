@@ -14,6 +14,9 @@ et exécute les commandes suivantes :
 `git remote add origin https://your-origin-repository.com`  
 `composer install`  
 `yarn install`  
+
+Update the webpack.config.js file with the name of your template's folder line 13
+
 `yarn encore dev`  
 
 Démarre ton serveur PHP à la racine de ton site :  
