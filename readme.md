@@ -15,7 +15,7 @@ et exécute les commandes suivantes :
 `composer install`  
 `yarn install`  
 
-Update the webpack.config.js file with the name of your template's folder line 13
+Modifie le fichier webpack.config.js ligne 13 pour spécifier le nom du dossier que tu as choisi pour ton thème.
 
 `yarn encore dev`  
 
